@@ -1,0 +1,33 @@
+<div class="modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">User data:</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <h3>Username:</h3>
+        <input type="text" class="form-control" [disabled]="change" [(ngModel)]="registration.loginAccount.username">
+      </div>
+      <div class="row" *ngIf="!change">
+        <h3>Password:</h3>
+        <input type="text" class="form-control" [(ngModel)]="registration.loginAccount.password">
+      </div>
+      <div class="row">
+        <h3>First name:</h3>
+        <input type="text" class="form-control" [(ngModel)]="registration.firstName">
+      </div>
+      <div class="row">
+        <h3>Last name:</h3>
+        <input type="text" class="form-control" [(ngModel)]="registration.lastName">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="sendData()">
+        <i class="fa fa-save"></i>&nbsp;&nbsp;Save
+      </button>
+    </div>
+  </div>
+</div>

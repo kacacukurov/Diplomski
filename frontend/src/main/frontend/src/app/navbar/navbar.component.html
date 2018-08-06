@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-dark fixed-top" style="height: 9%; margin-bottom: 80px !important;">
+
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
+    <a class="navbar-brand" routerLink="admin/">Users</a>
+  </div>
+  <div class="col-lg-6"></div>
+
+  <div *ngIf="!jwtService.tokenExist()" class="col-sm-1"><a class="navbar-brand" routerLink="login">Login</a></div>
+
+  <div *ngIf="jwtService.tokenExist()" class="col-sm-1"><a class="navbar-brand color" style="color: white; cursor: pointer"
+                                                           (click)="logout()" >Logout</a></div>
+</nav>
+<br/>
+<br/>
