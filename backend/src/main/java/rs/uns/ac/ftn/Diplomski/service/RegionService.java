@@ -13,4 +13,6 @@ public interface RegionService {
     Region save(Region region);
 
     void remove(Region region);
+
+    Region findByRegionName(String regionName);
 }

@@ -43,4 +43,10 @@ public class WineServiceImpl implements WineService {
         wine.setDeleted(true);
         this.wineRepository.save(wine);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Wine findByWineName(String wineName){
+        return this.wineRepository.findByWineName(wineName);
+    }
 }

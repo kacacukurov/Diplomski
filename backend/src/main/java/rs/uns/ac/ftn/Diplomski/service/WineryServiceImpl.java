@@ -43,4 +43,10 @@ public class WineryServiceImpl implements WineryService {
         winery.setDeleted(true);
         this.wineryRepository.save(winery);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Winery findByWineryName(String wineryName){
+        return this.wineryRepository.findByWineryName(wineryName);
+    }
 }

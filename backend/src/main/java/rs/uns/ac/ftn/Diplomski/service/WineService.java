@@ -13,4 +13,6 @@ public interface WineService {
     Wine save(Wine wine);
 
     void remove(Wine wine);
+
+    Wine findByWineName(String wineName);
 }

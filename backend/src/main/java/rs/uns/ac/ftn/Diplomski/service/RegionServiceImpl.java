@@ -43,4 +43,10 @@ public class RegionServiceImpl implements RegionService {
         region.setDeleted(true);
         this.regionRepository.save(region);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Region findByRegionName(String regionName){
+        return this.regionRepository.findByRegionName(regionName);
+    }
 }

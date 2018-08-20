@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import rs.uns.ac.ftn.Diplomski.model.Grape;
 
 public interface GrapeRepository extends JpaRepository<Grape, Long> {
+
+    Grape findByGrapeName(String grapeName);
 }

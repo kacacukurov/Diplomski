@@ -2,8 +2,7 @@ package rs.uns.ac.ftn.Diplomski.web.dto;
 
 public class TokenDTO {
 
-    String value;
-
+    private String value;
 
     public TokenDTO() {
     }

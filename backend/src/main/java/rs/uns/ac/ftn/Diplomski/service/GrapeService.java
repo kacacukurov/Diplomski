@@ -10,6 +10,8 @@ public interface GrapeService {
 
     Grape findOne(Long id);
 
+    Grape findByGrapeName(String grapeName);
+
     Grape save(Grape grape);
 
     void remove(Grape grape);

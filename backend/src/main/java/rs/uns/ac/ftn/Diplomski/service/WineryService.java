@@ -13,4 +13,6 @@ public interface WineryService {
     Winery save(Winery winery);
 
     void remove(Winery winery);
+
+    Winery findByWineryName(String wineryName);
 }

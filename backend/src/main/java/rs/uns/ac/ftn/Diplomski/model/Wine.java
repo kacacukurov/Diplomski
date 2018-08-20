@@ -19,6 +19,9 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @Column(nullable = false)
+    private String wineName;
+
     @Column
     private WineBody wineBody;
 
@@ -52,6 +55,19 @@ public class Wine {
 
     public Wine() {
         this.grapes = new ArrayList<>();
+    }
+
+    public Wine(String wineName, WineBody wineBody, WineColor wineColor, WineSugar wineSugar, WineFlavor wineFlavor,
+                Region region, List<Grape> grapes, Long subclassOfWine, Winery winery) {
+        this.wineName = wineName;
+        this.wineBody = wineBody;
+        this.wineColor = wineColor;
+        this.wineSugar = wineSugar;
+        this.wineFlavor = wineFlavor;
+        this.region = region;
+        this.grapes = grapes;
+        this.subclassOfWine = subclassOfWine;
+        this.winery = winery;
     }
 
     public Long getId() {
@@ -140,5 +156,13 @@ public class Wine {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getWineName() {
+        return wineName;
+    }
+
+    public void setWineName(String wineName) {
+        this.wineName = wineName;
     }
 }

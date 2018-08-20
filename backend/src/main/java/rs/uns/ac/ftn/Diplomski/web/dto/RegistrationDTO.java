@@ -3,9 +3,7 @@ package rs.uns.ac.ftn.Diplomski.web.dto;
 public class RegistrationDTO {
 
     private LoginDTO loginAccount;
-
     private String firstName;
-
     private String lastName;
 
     public RegistrationDTO(){}

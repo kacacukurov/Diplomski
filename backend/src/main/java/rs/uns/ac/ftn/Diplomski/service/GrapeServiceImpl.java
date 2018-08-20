@@ -43,4 +43,10 @@ public class GrapeServiceImpl implements GrapeService {
         grape.setDeleted(true);
         this.grapeRepository.save(grape);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Grape findByGrapeName(String grapeName){
+        return this.grapeRepository.findByGrapeName(grapeName);
+    }
 }
