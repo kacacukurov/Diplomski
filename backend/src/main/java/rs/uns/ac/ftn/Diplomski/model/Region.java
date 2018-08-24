@@ -17,7 +17,7 @@ public class Region {
     private String regionName;
 
     @Column
-    private Long locatedIn;
+    private Long locatedin;
 
     @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
     @Version
@@ -29,9 +29,9 @@ public class Region {
     public Region() {
     }
 
-    public Region(String regionName, Long locatedIn) {
+    public Region(String regionName, Long locatedin) {
         this.regionName = regionName;
-        this.locatedIn = locatedIn;
+        this.locatedin = locatedin;
     }
 
     public Long getId() {
@@ -50,12 +50,12 @@ public class Region {
         this.regionName = regionName;
     }
 
-    public Long getLocatedIn() {
-        return locatedIn;
+    public Long getLocatedin() {
+        return locatedin;
     }
 
-    public void setLocatedIn(Long locatedIn) {
-        this.locatedIn = locatedIn;
+    public void setLocatedin(Long locatedin) {
+        this.locatedin = locatedin;
     }
 
     public int getVersion() {

@@ -49,4 +49,10 @@ public class RegionServiceImpl implements RegionService {
     public Region findByRegionName(String regionName){
         return this.regionRepository.findByRegionName(regionName);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Region> findByLocatedIn(Long id){
+        return this.regionRepository.findByLocatedin(id);
+    }
 }

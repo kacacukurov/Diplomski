@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rs.uns.ac.ftn.Diplomski.model.Winery;
 import rs.uns.ac.ftn.Diplomski.service.WineryService;
 import rs.uns.ac.ftn.Diplomski.web.dto.WineryDTO;
@@ -27,7 +24,7 @@ public class WineryController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity addNewWinery(@RequestParam String wineryName){
+    public ResponseEntity addNewWinery(@RequestBody String wineryName){
         Winery winery = this.wineryService.findByWineryName(wineryName);
         if(winery != null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -35,7 +32,7 @@ public class WineryController {
         winery = new Winery(wineryName);
         this.wineryService.save(winery);
 
-        return new ResponseEntity<>(wineryName, HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @RequestMapping(

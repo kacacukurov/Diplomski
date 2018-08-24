@@ -49,4 +49,10 @@ public class WineServiceImpl implements WineService {
     public Wine findByWineName(String wineName){
         return this.wineRepository.findByWineName(wineName);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Wine> findBySubclassOfWine(Long id){
+        return this.wineRepository.findBySubclassOfWine(id);
+    }
 }

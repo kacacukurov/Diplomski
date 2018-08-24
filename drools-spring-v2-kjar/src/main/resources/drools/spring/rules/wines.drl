@@ -1,0 +1,28 @@
+import rs.uns.ac.ftn.Diplomski.model.Winery
+import rs.uns.ac.ftn.Diplomski.model.Wine
+import rs.uns.ac.ftn.Diplomski.model.Grape
+import rs.uns.ac.ftn.Diplomski.model.Region
+import rs.uns.ac.ftn.Diplomski.model.drl.GrapeList
+import rs.uns.ac.ftn.Diplomski.model.drl.PossibleWines
+import rs.uns.ac.ftn.Diplomski.service.WineService
+
+import java.util.List;
+
+rule "Grapes for red bordeaux"
+    agenda-group "wines"
+    when
+        $wineService: WineService();
+        $pb: PossibleWines($possibleWines: wines);
+        $gl: GrapeList($grapeList: grapeLists)
+        $n: Number(intValue >= 4) from accumulate (
+            Grape(grapeName == "Merlot" || grapeName == "Cabernet Sauvignon" || grapeName == "Cabernet Franc" ||
+            grapeName == "Petit Verdot" || grapeName == "Malbec")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1),
+            result(count)
+        )
+    then
+        $possibleWines.add("Red bordeaux");
+        update($possibleWines);
+end

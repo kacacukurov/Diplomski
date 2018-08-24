@@ -60,12 +60,13 @@ public class RegionController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         if(regionDTO.getLocatedIn() != null){
-            Region locatedIn = this.regionService.findOne(regionDTO.getLocatedIn());
+            Region locatedIn = this.regionService.findByRegionName(regionDTO.getLocatedIn());
             if(locatedIn == null)
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        region.setLocatedIn(regionDTO.getLocatedIn());
+        if(regionDTO.getLocatedIn() != null)
+            region.setLocatedin(this.regionService.findByRegionName(regionDTO.getLocatedIn()).getId());
         region.setRegionName(regionDTO.getRegionName());
         
         this.regionService.save(region);
@@ -77,11 +78,21 @@ public class RegionController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity getAllGrapes() {
+    public ResponseEntity getAllRegions() {
         List<Region> regions = this.regionService.findAll();
         List<RegionDTO> regionDTOS = new ArrayList<>();
-        for(Region region: regions)
-            regionDTOS.add(new RegionDTO(region));
+        for(Region region: regions){
+            RegionDTO locatedIn = new RegionDTO(region);
+            if(region.getLocatedin() != null)
+                locatedIn.setLocatedIn(this.regionService.findOne(region.getLocatedin()).getRegionName());
+
+            List<Region> subRegions = this.regionService.findByLocatedIn(region.getId());
+            if(subRegions.size() == 0)
+                locatedIn.setSuperRegion(false);
+            else
+                locatedIn.setSuperRegion(true);
+            regionDTOS.add(locatedIn);
+        }
         return new ResponseEntity<>(regionDTOS, HttpStatus.OK);
     }
 

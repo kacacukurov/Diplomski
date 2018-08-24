@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rs.uns.ac.ftn.Diplomski.model.Grape;
 import rs.uns.ac.ftn.Diplomski.service.GrapeService;
 import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO;
@@ -27,7 +24,7 @@ public class GrapeController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity addNewGrape(@RequestParam String grapeName){
+    public ResponseEntity addNewGrape(@RequestBody String grapeName){
         Grape grape = this.grapeService.findByGrapeName(grapeName);
         if(grape != null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

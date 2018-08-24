@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row" style="margin-bottom: 2%">
+    <div class="col-lg-2"><h4 style="margin-left: 5%">Wineries:</h4></div>
+    <div class="col-lg-7"></div>
+    <div class="col-lg-2"><button style="margin-left: -7%" class="btn btn-success" (click)="addWinery()">Add new</button></div>
+  </div>
+  <div *ngIf="listWineries.length == 0">
+    <div class="row">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-4"><h4>There are no wineries!</h4></div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+  <div *ngFor="let winery of listWineries">
+    <div class="card-body row bg-dark">
+      <h5  class="col-sm-2" style="color: white">{{winery.wineryName}}</h5>
+      <span class="col-sm-7"></span>
+      <span class="col-sm-1">
+        <button class="btn btn-danger" (click)="deleteWinery(winery)">Delete</button>
+      </span>
+    </div>
+    <br>
+  </div>
+  <br/>
+
+</div>
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>

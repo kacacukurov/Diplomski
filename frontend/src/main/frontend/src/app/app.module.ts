@@ -16,6 +16,10 @@ import {ToasterModule, ToasterService} from "angular5-toaster/dist";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JwtInterceptor} from "./core/interceptors/jwt-interceptor";
 import {UserService} from "./core/services/user.service";
+import {GrapeService} from "./core/services/grape.service";
+import {WineService} from "./core/services/wine.service";
+import {WineryService} from "./core/services/winery.service";
+import {RegionService} from "./core/services/region.service";
 
 
 @NgModule({
@@ -41,6 +45,10 @@ import {UserService} from "./core/services/user.service";
     JwtService,
     UserService,
     ToasterService,
+    GrapeService,
+    WineService,
+    WineryService,
+    RegionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

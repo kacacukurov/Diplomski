@@ -1,0 +1,43 @@
+<div class="modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">About region:</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="!change">
+      <div class="row">
+        <h3>Region name:</h3>
+        <input type="text" class="form-control" [(ngModel)]="newRegionDTO.regionName">
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h3>Located in:</h3>
+        <div class="col-lg-4">
+          <select class="form-control" [(ngModel)]="newRegionDTO.locatedIn" required>
+            <option *ngFor="let region of listRegions" [value]="region.id">{{region.regionName}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body" *ngIf="change">
+      <div class="row">
+        <h3>Region name:</h3>
+        <input type="text" class="form-control" [(ngModel)]="changeRegionDTO.regionName">
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h3>Located in:</h3>
+        <div class="col-lg-4">
+          <select class="form-control" [(ngModel)]="changeRegionDTO.locatedIn" required>
+            <option *ngFor="let region of listRegions" [value]="region.regionName">{{region.regionName}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="sendData()">
+        <i class="fa fa-save"></i>&nbsp;&nbsp;Save
+      </button>
+    </div>
+  </div>
+</div>

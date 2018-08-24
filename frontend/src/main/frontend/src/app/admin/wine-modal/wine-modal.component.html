@@ -1,0 +1,189 @@
+<div class="modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">About wine:</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="!change" style="margin-left: 1%">
+      <div class="row">
+        <h3>Name:</h3>
+        <input style="width: 90%" type="text" class="form-control" [(ngModel)]="newWineDTO.wineName">
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h4>Subclass of wine:</h4>
+        <div class="col-lg-4">
+          <select class="form-control" [(ngModel)]="newWineDTO.subclassOfWine" required>
+            <option *ngFor="let wine of listWines" [value]="wine.id">{{wine.wineName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h4>Body:</h4>
+        <div class="col-lg-4" style="margin-left: 2%">
+          <select class="form-control" [(ngModel)]="wineBody" required>
+            <option *ngFor="let body of wineBodies" [value]="body">{{body}}</option>
+          </select>
+        </div>
+        <h4 style="margin-left: 6%">Color:</h4>
+        <div class="col-lg-4" style="margin-left: 1%">
+          <select class="form-control" [(ngModel)]="wineColor" required>
+            <option *ngFor="let color of wineColors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%" >
+        <h4>Sugar:</h4>
+        <div class="col-lg-4" style="margin-left: 1%">
+          <select class="form-control" [(ngModel)]="wineSugar" required>
+            <option *ngFor="let sugar of wineSugars" [value]="sugar">{{sugar}}</option>
+          </select>
+        </div>
+        <h4 style="margin-left: 6%">Flavor:</h4>
+        <div class="col-lg-4">
+          <select class="form-control" [(ngModel)]="wineFlavor" required>
+            <option *ngFor="let flavor of wineFlavors" [value]="flavor">{{flavor}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h4>Winery:</h4>
+        <div class="col-lg-4" style="margin-left: -1%">
+          <select class="form-control" [(ngModel)]="newWineDTO.wineryId" required>
+            <option *ngFor="let winery of listWineries" [value]="winery.id">{{winery.wineryName}}</option>
+          </select>
+        </div>
+        <h4 style="margin-left: 6%">Region:</h4>
+        <div class="col-lg-4" style="margin-left: -1%">
+          <select class="form-control" [(ngModel)]="newWineDTO.regionId" required>
+            <option *ngFor="let region of listRegions" [value]="region.id">{{region.regionName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h3>Grapes:</h3>
+        <div class="col-lg-4" *ngIf="firstGrape">
+          <select class="form-control" [(ngModel)]="firstGrape" required>
+            <option *ngFor="let grape of listGrapes" [ngValue]="grape.grapeName">{{grape.grapeName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-4">
+          <button type="button" class="btn btn-default" (click)="addGrape()">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4" *ngIf="addedGrapes.length!=0">
+          <div>
+            <table class="table table-hover table-condensed">
+              <tbody>
+              <tr *ngFor="let grape of addedGrapes">
+                <td>{{grape.grapeName}}</td>
+                <td><button type="button" class="btn btn-default" (click)="removeGrape(grape)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body" *ngIf="change" style="margin-left: 1%">
+      <div class="row">
+        <h3>Name:</h3>
+        <input style="width: 90%" type="text" class="form-control" [(ngModel)]="changeWineDTO.wineName">
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h4>Subclass of wine:</h4>
+        <div class="col-lg-4">
+          <select class="form-control" [(ngModel)]="changeWineDTO.subclassOfWine" required>
+            <option *ngFor="let wine of listWines" [value]="wine.wineName">{{wine.wineName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h4>Body:</h4>
+        <div class="col-lg-4" style="margin-left: 2%">
+          <select class="form-control" [(ngModel)]="changeWineDTO.wineBody" required>
+            <option *ngFor="let body of wineBodies" [value]="body">{{body}}</option>
+          </select>
+        </div>
+        <h4 style="margin-left: 6%">Color:</h4>
+        <div class="col-lg-4" style="margin-left: 1%">
+          <select class="form-control" [(ngModel)]="changeWineDTO.wineColor" required>
+            <option *ngFor="let color of wineColors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%" >
+        <h4>Sugar:</h4>
+        <div class="col-lg-4" style="margin-left: 1%">
+          <select class="form-control" [(ngModel)]="changeWineDTO.wineSugar" required>
+            <option *ngFor="let sugar of wineSugars" [value]="sugar">{{sugar}}</option>
+          </select>
+        </div>
+        <h4 style="margin-left: 6%">Flavor:</h4>
+        <div class="col-lg-4">
+          <select class="form-control" [(ngModel)]="changeWineDTO.wineFlavor" required>
+            <option *ngFor="let flavor of wineFlavors" [value]="flavor">{{flavor}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h4>Winery:</h4>
+        <div class="col-lg-4" style="margin-left: -1%">
+          <select class="form-control" [(ngModel)]="changeWineDTO.wineryDTO.wineryName" required>
+            <option *ngFor="let winery of listWineries" [value]="winery.wineryName">{{winery.wineryName}}</option>
+          </select>
+        </div>
+        <h4 style="margin-left: 6%">Region:</h4>
+        <div class="col-lg-4" style="margin-left: -1%">
+          <select class="form-control" [(ngModel)]="changeWineDTO.regionDTO.regionName" required>
+            <option *ngFor="let region of listRegions" [value]="region.regionName">{{region.regionName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 2%">
+        <h3>Grapes:</h3>
+        <div class="col-lg-4" *ngIf="firstGrape">
+          <select class="form-control" [(ngModel)]="firstGrape" required>
+            <option *ngFor="let grape of listGrapes" [ngValue]="grape.grapeName">{{grape.grapeName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-4">
+          <button type="button" class="btn btn-default" (click)="addGrape()">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4" *ngIf="addedGrapes.length!=0">
+          <div>
+            <table class="table table-hover table-condensed">
+              <tbody>
+              <tr *ngFor="let gr of addedGrapes">
+                <td>{{gr.grapeName}}</td>
+                <td><button type="button" class="btn btn-default" (click)="removeGrape(gr)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="sendData()">
+        <i class="fa fa-save"></i>&nbsp;&nbsp;Save
+      </button>
+    </div>
+  </div>
+</div>

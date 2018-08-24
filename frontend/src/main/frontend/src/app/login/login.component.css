@@ -18,7 +18,7 @@
 }
 
 .panel-heading {
-  background-color: rgba(66, 139, 202, 0.7);
+  background-color: #A50026;
   color: white;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
@@ -29,7 +29,7 @@
 }
 
 .btn {
-  background-color: rgb(66, 139, 202);
+  background-color: #A50026;
   color: white;
 }
 

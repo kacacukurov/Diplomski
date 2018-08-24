@@ -41,7 +41,7 @@ public class WineController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity addNewRegion(@RequestBody NewWineDTO newWineDTO) {
+    public ResponseEntity addNewWine(@RequestBody NewWineDTO newWineDTO) {
 
         Wine wine = this.wineService.findByWineName(newWineDTO.getWineName());
         if(wine != null)
@@ -69,8 +69,8 @@ public class WineController {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        for(Long id: newWineDTO.getGrapeIds()){
-            Grape grape = this.grapeService.findOne(id);
+        for(String name: newWineDTO.getGrapeNames()){
+            Grape grape = this.grapeService.findByGrapeName(name);
             if(grape == null)
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             grapes.add(grape);
@@ -81,7 +81,7 @@ public class WineController {
                 winery);
 
         this.wineService.save(wine);
-        return new ResponseEntity<>(newWineDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(
@@ -111,7 +111,8 @@ public class WineController {
             if(region == null)
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             wine.setRegion(region);
-        }
+        }else
+            wine.setRegion(null);
 
         wine.setGrapes(new ArrayList<>());
         for(GrapeDTO grapeDTO: wineDTO.getGrapeDTOS()){
@@ -122,11 +123,12 @@ public class WineController {
         }
 
         if(wineDTO.getSubclassOfWine() != null){
-            Wine subclassOfWine = this.wineService.findOne(wineDTO.getSubclassOfWine());
+            Wine subclassOfWine = this.wineService.findByWineName(wineDTO.getSubclassOfWine());
             if(subclassOfWine == null)
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
-            wine.setSubclassOfWine(wineDTO.getSubclassOfWine());
-        }
+            wine.setSubclassOfWine(subclassOfWine.getId());
+        }else
+            wine.setSubclassOfWine(null);
 
         if(wineDTO.getWineryDTO() != null){
             Winery winery = this.wineryService.findOne(wineDTO.getWineryDTO().getId());
@@ -134,6 +136,8 @@ public class WineController {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             wine.setWinery(winery);
         }
+        else
+            wine.setWinery(null);
 
         this.wineService.save(wine);
         return new ResponseEntity<>(wineDTO, HttpStatus.CREATED);
@@ -147,8 +151,17 @@ public class WineController {
     public ResponseEntity getAllWines() {
         List<Wine> wines = this.wineService.findAll();
         List<WineDTO> wineDTOS = new ArrayList<>();
-        for(Wine wine: wines)
-            wineDTOS.add(new WineDTO(wine));
+        for(Wine wine: wines) {
+            WineDTO wineDTO = new WineDTO(wine);
+            if(wine.getSubclassOfWine() != null)
+                wineDTO.setSubclassOfWine(this.wineService.findOne(wine.getSubclassOfWine()).getWineName());
+            List<Wine> subwines =  this.wineService.findBySubclassOfWine(wine.getId());
+            if(subwines.isEmpty())
+                wineDTO.setSuperClass(false);
+            else
+                wineDTO.setSuperClass(true);
+            wineDTOS.add(wineDTO);
+        }
         return new ResponseEntity<>(wineDTOS, HttpStatus.OK);
     }
 

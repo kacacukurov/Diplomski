@@ -3,7 +3,19 @@
   <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
     <a class="navbar-brand" routerLink="admin/">Users</a>
   </div>
-  <div class="col-lg-6"></div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
+    <a class="navbar-brand" routerLink="admin/grape">Grapes</a>
+  </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
+    <a class="navbar-brand" routerLink="admin/wine">Wines</a>
+  </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
+    <a class="navbar-brand" routerLink="admin/winery">Wineries</a>
+  </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
+    <a class="navbar-brand" routerLink="admin/region">Regions</a>
+  </div>
+  <div class="col-lg-5"></div>
 
   <div *ngIf="!jwtService.tokenExist()" class="col-sm-1"><a class="navbar-brand" routerLink="login">Login</a></div>
 

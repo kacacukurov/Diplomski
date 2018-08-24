@@ -15,22 +15,22 @@ public class NewWineDTO {
     private WineSugar wineSugar;
     private WineFlavor wineFlavor;
     private Long regionId;
-    private List<Long> grapeIds;
+    private List<String> grapeNames;
     private Long subclassOfWine;
     private Long wineryId;
 
     public NewWineDTO() {
     }
 
-    public NewWineDTO(String wineName, WineBody wineBody, WineColor wineColor, WineSugar wineSugar,
-                      WineFlavor wineFlavor, Long regionId, List<Long> grapeIds, Long subclassOfWine, Long wineryId) {
+    public NewWineDTO(String wineName, WineBody wineBody, WineColor wineColor, WineSugar wineSugar, WineFlavor wineFlavor,
+                      Long regionId, List<String> grapeNames, Long subclassOfWine, Long wineryId) {
         this.wineName = wineName;
         this.wineBody = wineBody;
         this.wineColor = wineColor;
         this.wineSugar = wineSugar;
         this.wineFlavor = wineFlavor;
         this.regionId = regionId;
-        this.grapeIds = grapeIds;
+        this.grapeNames = grapeNames;
         this.subclassOfWine = subclassOfWine;
         this.wineryId = wineryId;
     }
@@ -75,12 +75,12 @@ public class NewWineDTO {
         this.regionId = regionId;
     }
 
-    public List<Long> getGrapeIds() {
-        return grapeIds;
+    public List<String> getGrapeNames() {
+        return grapeNames;
     }
 
-    public void setGrapeIds(List<Long> grapeIds) {
-        this.grapeIds = grapeIds;
+    public void setGrapeNames(List<String> grapeNames) {
+        this.grapeNames = grapeNames;
     }
 
     public Long getSubclassOfWine() {

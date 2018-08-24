@@ -15,4 +15,6 @@ public interface WineService {
     void remove(Wine wine);
 
     Wine findByWineName(String wineName);
+
+    List<Wine> findBySubclassOfWine(Long id);
 }

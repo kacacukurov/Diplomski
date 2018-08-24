@@ -96,7 +96,9 @@ export class UserListComponent implements OnInit {
         this.userService.allAdmins().subscribe(data =>{
           this.listAdmins = data;
         });
+        this.toasterService.pop('success', 'Success', 'Admin deleted!');
       }
+
     },(error: AppError) => {
       if(error instanceof ForbiddenError)
         this.toasterService.pop('error', 'Error', 'You do not have permission for this action!');

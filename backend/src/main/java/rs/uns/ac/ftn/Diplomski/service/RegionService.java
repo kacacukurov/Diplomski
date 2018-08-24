@@ -15,4 +15,6 @@ public interface RegionService {
     void remove(Region region);
 
     Region findByRegionName(String regionName);
+
+    List<Region> findByLocatedIn(Long id);
 }

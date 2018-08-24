@@ -20,15 +20,16 @@ public class WineDTO {
     private WineFlavor wineFlavor;
     private RegionDTO regionDTO;
     private List<GrapeDTO> grapeDTOS;
-    private Long subclassOfWine;
+    private String subclassOfWine;
     private WineryDTO wineryDTO;
+    private boolean isSuperClass;
 
     public WineDTO() {
     }
 
-    public WineDTO(Long id, String wineName, WineBody wineBody, WineColor wineColor, WineSugar wineSugar,
-                   WineFlavor wineFlavor, RegionDTO regionDTO, List<GrapeDTO> grapeDTOS, Long subclassOfWine,
-                   WineryDTO wineryDTO) {
+    public WineDTO(Long id, String wineName, WineBody wineBody, WineColor wineColor, WineSugar wineSugar, WineFlavor
+            wineFlavor, RegionDTO regionDTO, List<GrapeDTO> grapeDTOS, String subclassOfWine, WineryDTO wineryDTO,
+                   boolean isSuperClass) {
         this.id = id;
         this.wineName = wineName;
         this.wineBody = wineBody;
@@ -39,6 +40,7 @@ public class WineDTO {
         this.grapeDTOS = grapeDTOS;
         this.subclassOfWine = subclassOfWine;
         this.wineryDTO = wineryDTO;
+        this.isSuperClass = isSuperClass;
     }
 
     public WineDTO(Wine wine){
@@ -48,9 +50,10 @@ public class WineDTO {
         this.wineColor = wine.getWineColor();
         this.wineSugar = wine.getWineSugar();
         this.wineFlavor = wine.getWineFlavor();
-        this.regionDTO = new RegionDTO(wine.getRegion());
-        this.subclassOfWine = wine.getSubclassOfWine();
-        this.wineryDTO = new WineryDTO(wine.getWinery());
+        if(wine.getRegion() != null)
+            this.regionDTO = new RegionDTO(wine.getRegion());
+        if(wine.getWinery() != null)
+            this.wineryDTO = new WineryDTO(wine.getWinery());
         this.grapeDTOS = new ArrayList<>();
         for(Grape grape: wine.getGrapes())
             grapeDTOS.add(new GrapeDTO(grape));
@@ -120,19 +123,27 @@ public class WineDTO {
         this.grapeDTOS = grapeDTOS;
     }
 
-    public Long getSubclassOfWine() {
-        return subclassOfWine;
-    }
-
-    public void setSubclassOfWine(Long subclassOfWine) {
-        this.subclassOfWine = subclassOfWine;
-    }
-
     public WineryDTO getWineryDTO() {
         return wineryDTO;
     }
 
     public void setWineryDTO(WineryDTO wineryDTO) {
         this.wineryDTO = wineryDTO;
+    }
+
+    public String getSubclassOfWine() {
+        return subclassOfWine;
+    }
+
+    public void setSubclassOfWine(String subclassOfWine) {
+        this.subclassOfWine = subclassOfWine;
+    }
+
+    public boolean isSuperClass() {
+        return isSuperClass;
+    }
+
+    public void setSuperClass(boolean superClass) {
+        isSuperClass = superClass;
     }
 }

@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row" style="margin-bottom: 2%">
+    <div class="col-lg-2"><h4 style="margin-left: 5%">Wines:</h4></div>
+    <div class="col-lg-7"></div>
+    <div class="col-lg-2"><button style="margin-left: -7%" class="btn btn-success" (click)="addWine()">Add new</button></div>
+  </div>
+  <div *ngIf="listWines.length == 0">
+    <div class="row">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-4"><h4>There are no wines!</h4></div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+  <div *ngFor="let wine of listWines">
+    <div class="card-body row bg-dark">
+      <h5  class="col-sm-3" style="color: white">{{wine.wineName}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineBody}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineColor}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineSugar}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineFlavor}}</h5>
+      <span class="col-sm-2"></span>
+      <span class="col-sm-1">
+        <button class="btn btn-info" (click)="changeWine(wine)">More</button>
+      </span>
+      <span class="col-sm-1">
+        <button class="btn btn-danger"  [disabled]="wine.superClass==true" (click)="deleteWine(wine)">Delete</button>
+      </span>
+    </div>
+    <br>
+  </div>
+  <br/>
+
+</div>
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>

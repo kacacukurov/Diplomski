@@ -5,6 +5,14 @@ import {SharedModule} from "../shared/shared.module";
 import {AdminRouterModule} from "./admin-router.module";
 import {ToasterModule} from "angular5-toaster/dist";
 import { UserModalComponent } from './user-modal/user-modal.component';
+import { GrapeListComponent } from './grape-list/grape-list.component';
+import { RegionListComponent } from './region-list/region-list.component';
+import { WineListComponent } from './wine-list/wine-list.component';
+import { WineryListComponent } from './winery-list/winery-list.component';
+import { GrapeModalComponent } from './grape-modal/grape-modal.component';
+import { WineModalComponent } from './wine-modal/wine-modal.component';
+import { WineryModalComponent } from './winery-modal/winery-modal.component';
+import { RegionModalComponent } from './region-modal/region-modal.component';
 
 @NgModule({
   imports: [
@@ -15,9 +23,21 @@ import { UserModalComponent } from './user-modal/user-modal.component';
   ],
   declarations: [
     UserListComponent,
-    UserModalComponent],
+    UserModalComponent,
+    GrapeListComponent,
+    RegionListComponent,
+    WineListComponent,
+    WineryListComponent,
+    GrapeModalComponent,
+    WineModalComponent,
+    WineryModalComponent,
+    RegionModalComponent],
   entryComponents: [
-    UserModalComponent
+    UserModalComponent,
+    GrapeModalComponent,
+    WineModalComponent,
+    WineryModalComponent,
+    RegionModalComponent
   ]
 })
 export class AdminModule { }
