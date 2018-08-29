@@ -58,6 +58,9 @@ export class LoginComponent implements OnInit {
         if(successfullyLoggedIn){
           if(this.jwt.hasRole("ADMIN"))
             this.router.navigate(['admin']);
+          else if(this.jwt.hasRole("USER")){
+            this.router.navigate(['user']);
+          }
         }
         else
           this.toasterService.pop('error', 'Error', 'Invalid login');

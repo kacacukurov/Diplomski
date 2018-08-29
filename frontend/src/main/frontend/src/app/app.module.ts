@@ -20,6 +20,7 @@ import {GrapeService} from "./core/services/grape.service";
 import {WineService} from "./core/services/wine.service";
 import {WineryService} from "./core/services/winery.service";
 import {RegionService} from "./core/services/region.service";
+import {DroolsService} from "./core/services/drools.service";
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import {RegionService} from "./core/services/region.service";
     WineService,
     WineryService,
     RegionService,
+    DroolsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

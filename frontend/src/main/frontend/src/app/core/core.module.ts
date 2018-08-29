@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {AnonymousGuard} from "./guards/anonymous.guard";
 import {AuthGuard} from "./guards/auth.guard";
 import {AdminGuard} from "./guards/admin.guard";
+import {UserGuard} from "./guards/user.guard";
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import {AdminGuard} from "./guards/admin.guard";
   providers: [
     AnonymousGuard,
     AuthGuard,
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ]
 })
 export class CoreModule {

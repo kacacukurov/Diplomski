@@ -15,6 +15,15 @@
   <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('ADMIN')">
     <a class="navbar-brand" routerLink="admin/region">Regions</a>
   </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('USER')">
+    <a class="navbar-brand" routerLink="user/">Find wines</a>
+  </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('USER')">
+    <a class="navbar-brand" routerLink="user/grapes">Find grapes</a>
+  </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('USER')">
+    <a class="navbar-brand" routerLink="user/wineGrapes">Find wines and Grapes</a>
+  </div>
   <div class="col-lg-5"></div>
 
   <div *ngIf="!jwtService.tokenExist()" class="col-sm-1"><a class="navbar-brand" routerLink="login">Login</a></div>
