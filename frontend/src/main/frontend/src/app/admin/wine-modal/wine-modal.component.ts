@@ -176,7 +176,7 @@ export class WineModalComponent implements OnInit {
     this.change = false;
 
     let foundWinery = false;
-    this.listWineries = this.listWineries.slice(-1,1);
+    this.listWineries.pop();
     for(let winery of this.listWineries){
       if(winery.wineryName == this.changeWineDTO.wineryDTO.wineryName){
         this.changeWineDTO.wineryDTO = winery;
@@ -187,7 +187,7 @@ export class WineModalComponent implements OnInit {
       this.changeWineDTO.wineryDTO = null;
 
     let foundRegion = false;
-    this.listRegions = this.listRegions.slice(-1,1);
+    this.listRegions.pop();
     for(let region of this.listRegions){
       if(region.regionName == this.changeWineDTO.regionDTO.regionName){
         this.changeWineDTO.regionDTO = region;

@@ -112,6 +112,7 @@ export class WineListComponent implements OnInit {
     this.modalRef.content.modalRef = this.modalRef;
     this.modalRef.content.changeWineReady.subscribe( data => {
       this.changedWine = data;
+      console.log(this.changedWine);
        this.wineService.changeWine(this.changedWine).subscribe(data => {
         this.wineService.allWines().subscribe(data => {
           this.listWines = data;

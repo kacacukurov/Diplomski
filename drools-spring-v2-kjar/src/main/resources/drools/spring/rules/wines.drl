@@ -1,28 +1,359 @@
-import rs.uns.ac.ftn.Diplomski.model.Winery
 import rs.uns.ac.ftn.Diplomski.model.Wine
 import rs.uns.ac.ftn.Diplomski.model.Grape
-import rs.uns.ac.ftn.Diplomski.model.Region
 import rs.uns.ac.ftn.Diplomski.model.drl.GrapeList
 import rs.uns.ac.ftn.Diplomski.model.drl.PossibleWines
 import rs.uns.ac.ftn.Diplomski.service.WineService
 
 import java.util.List;
 
-rule "Grapes for red bordeaux"
+rule "Grapes for Chateauneuf-du-pape"
     agenda-group "wines"
+    lock-on-active
     when
         $wineService: WineService();
-        $pb: PossibleWines($possibleWines: wines);
-        $gl: GrapeList($grapeList: grapeLists)
+        $cdp: Wine(wineName == "Chateauneuf-du-pape");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 14) from accumulate (
+            Grape(grapeName == "Grenache" || grapeName == "Syrah" || grapeName == "Mourvedre" || grapeName == "Vaccarese" ||
+            grapeName == "Bourboulenc" || grapeName == "Cinsault" || grapeName == "Clairette Blanche" || grapeName == "Counoise"
+            || grapeName == "Grenache Blanc" || grapeName == "Muscardin" || grapeName == "Picardan" || grapeName == "Piquepoul Blanc"
+            || grapeName == "Roussanne" || grapeName == "Terret Noir")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($cdp);
+end
+
+rule "Grapes for Red bordeaux"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $rb: Wine(wineName == "Red bordeaux");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
         $n: Number(intValue >= 4) from accumulate (
             Grape(grapeName == "Merlot" || grapeName == "Cabernet Sauvignon" || grapeName == "Cabernet Franc" ||
             grapeName == "Petit Verdot" || grapeName == "Malbec")
             from $grapeList,
             init(int count = 0;),
-            action(count += 1),
+            action(count += 1;),
             result(count)
         )
     then
-        $possibleWines.add("Red bordeaux");
-        update($possibleWines);
+        $pb.getWines().add($rb);
+end
+
+rule "Grapes for White bordeaux"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $wb: Wine(wineName == "White bordeaux");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 3) from accumulate (
+            Grape(grapeName == "Semillon" || grapeName == "Sauvignon Blanc" || grapeName == "Muscadelle")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($wb);
+end
+
+rule "Grapes for Red bourgogne"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $rb: Wine(wineName == "Red bourgogne");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 2) from accumulate (
+            Grape(grapeName == "Pinot Noir" || grapeName == "Gamay")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($rb);
+end
+
+rule "Grapes for White bourgogne"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $rb: Wine(wineName == "White bourgogne");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 2) from accumulate (
+            Grape(grapeName == "Chardonnay" || grapeName == "Aligote")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($rb);
+end
+
+rule "Grapes for red rhone"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $rr: Wine(wineName == "Red rhone");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 3) from accumulate (
+            Grape(grapeName == "Grenache" || grapeName == "Syrah" || grapeName == "Mourvedre")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($rr);
+end
+
+rule "Grapes for white rhone"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $wr: Wine(wineName == "White rhone");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 6) from accumulate (
+            Grape(grapeName == "Marsanne" || grapeName == "Roussanne" || grapeName == "Viognier" || grapeName == "Clairette"
+             || grapeName == "Grenache Blanc" || grapeName == "Bourboulenc")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($wr);
+end
+
+rule "Grapes for Soave"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $s: Wine(wineName == "Soave");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 4) from accumulate (
+            Grape(grapeName == "Garganega" || grapeName == "Trebbiano" || grapeName == "Chardonnay" || grapeName == "Pinot Blanc")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($s);
+end
+
+rule "Grapes for Chianti"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $ch: Wine(wineName == "Chianti");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 3) from accumulate (
+            Grape(grapeName == "Sangiovese" || grapeName == "Cabernet Sauvignon" || grapeName == "Cabernet Franc")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($ch);
+end
+
+rule "Grapes for Super tuscan"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $st: Wine(wineName == "Super tuscan");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 5) from accumulate (
+            Grape(grapeName == "Merlot" || grapeName == "Cabernet Sauvignon" || grapeName == "Sangiovese"
+            || grapeName == "Syrah" || grapeName == "Cabernet Franc")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($st);
+end
+
+rule "Grapes for Amarone della valpolicella"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $adv: Wine(wineName == "Amarone della valpolicella");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 3) from accumulate (
+            Grape(grapeName == "Corvina" || grapeName == "Molinara" || grapeName == "Rondinella")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($adv);
+end
+
+rule "Grapes for Rioja"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $r: Wine(wineName == "Rioja");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 4) from accumulate (
+            Grape(grapeName == "Tempranillo" || grapeName == "Mazuelo" || grapeName == "Gracino" || grapeName == "Maturana Tinta")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($r);
+end
+
+rule "Grapes for White rioja"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $wr: Wine(wineName == "White rioja");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 4) from accumulate (
+            Grape(grapeName == "Viura" || grapeName == "Malvasia" || grapeName == "Verdejo" || grapeName == "Garnacha Blanca")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($wr);
+end
+
+rule "Grapes for Priorat"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $pr: Wine(wineName == "Priorat");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 5) from accumulate (
+            Grape(grapeName == "Grenache" || grapeName == "Syrah" || grapeName == "Carignan" || grapeName == "Cabernet Sauvignon"
+            || grapeName == "Merlot")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($pr);
+end
+
+rule "Grapes for Meritage"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $mr: Wine(wineName == "Meritage");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 6) from accumulate (
+            Grape(grapeName == "Cabernet Sauvignon" || grapeName == "Merlot" || grapeName == "Cabernet Franc" ||
+            grapeName == "Petit Verdot" || grapeName == "Malbec" || grapeName == "Carmenere")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($mr);
+end
+
+rule "Grapes for Port"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $pr: Wine(wineName == "Port");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 5) from accumulate (
+            Grape(grapeName == "Touriga Nacional" || grapeName == "Touriga Franca" || grapeName == "Tinta Roriz" ||
+            grapeName == "Tinto Cao" || grapeName == "Tinta Barroca")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($pr);
+end
+
+rule "Grapes for Provence rose"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $pr: Wine(wineName == "Provence rose");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 4) from accumulate (
+            Grape(grapeName == "Cinsault" || grapeName == "Grenache" || grapeName == "Syrah" || grapeName == "Rolle")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($pr);
+end
+
+rule "Grapes for Champagne"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $ch: Wine(wineName == "Champagne");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 3) from accumulate (
+            Grape(grapeName == "Chardonnay" || grapeName == "Pinot Meunier" || grapeName == "Pinot Noir")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($ch);
+end
+
+rule "Grapes for Cava"
+    agenda-group "wines"
+    lock-on-active
+    when
+        $cv: Wine(wineName == "Cava");
+        $pb: PossibleWines();
+        $gl: GrapeList($grapeList: grapeLists);
+        $n: Number(intValue >= 4) from accumulate (
+            Grape(grapeName == "Macabeo" || grapeName == "Parellada" || grapeName == "Xarello" || grapeName == "Chardonnay")
+            from $grapeList,
+            init(int count = 0;),
+            action(count += 1;),
+            result(count)
+        )
+    then
+        $pb.getWines().add($cv);
 end
