@@ -1,0 +1,22 @@
+
+#allGrapesTable{
+  display: block;
+  max-height: 500px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+#missingGrapesTable{
+  display: block;
+  max-height: 240px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+#chosenGrapesTable{
+  display: block;
+  max-height: 240px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+}

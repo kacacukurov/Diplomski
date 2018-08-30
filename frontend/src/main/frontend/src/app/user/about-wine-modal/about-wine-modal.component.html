@@ -1,0 +1,60 @@
+<div class="modal-lg">
+  <div class="modal-content">
+    <div class="modal-header" *ngIf="wine">
+      <h3 class="modal-title pull-left"><b>{{wine.wineName}}</b></h3>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="margin-left: 1%" *ngIf="wine">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row" style="margin-top: 2%" *ngIf="wine.subclassOfWine">
+            <h4>Subclass of wine: {{wine.subclassOfWine}}</h4>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <h4>Body:&nbsp;{{wine.wineBody}}</h4>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <h4>Color:&nbsp;{{wine.wineColor}}</h4>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <h4>Sugar:&nbsp;{{wine.wineSugar}}</h4>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <h4>Flavor:&nbsp;{{wine.wineFlavor}}</h4>
+          </div>
+          <div class="row" style="margin-top: 2%" *ngIf="wine.wineryDTO">
+            <h4>Winery:&nbsp;{{wine.wineryDTO.wineryName}}</h4>
+          </div>
+          <div class="row" style="margin-top: 2%" *ngIf="wine.regionDTO">
+            <h4>Region:&nbsp;{{wine.regionDTO.regionName}}</h4>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="table-wrapper-scroll-y">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Grape name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let grape of wine.grapeDTOS">
+                <th scope="row">{{grape.id}}</th>
+                <td>{{grape.grapeName}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="closeModal()">
+        <i class="fa fa-close"></i>&nbsp;&nbsp;Exit
+      </button>
+    </div>
+  </div>
+</div>

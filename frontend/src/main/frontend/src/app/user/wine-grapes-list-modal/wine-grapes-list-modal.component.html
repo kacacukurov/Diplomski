@@ -1,0 +1,66 @@
+<div class="modal-lg">
+  <div class="modal-content">
+    <div class="modal-header" *ngIf="wine">
+      <h3 class="modal-title pull-left"><b>{{wine.wineDTO.wineName}}</b></h3>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="margin-left: 1%">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+          <div class="row">
+            <h3>Existing grapes</h3>
+          </div>
+          <div class="row">
+            <div class="table-wrapper-scroll-y" *ngIf="existingGrapes">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Grape name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let grape of existingGrapes">
+                  <th scope="row">{{grape.id}}</th>
+                  <td>{{grape.grapeName}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="row">
+            <h3>Missing grapes</h3>
+          </div>
+          <div class="row">
+            <div class="table-wrapper-scroll-y">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Grape name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let grape of missingGrapes">
+                  <th scope="row">{{grape.id}}</th>
+                  <td>{{grape.grapeName}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="closeModal()">
+        <i class="fa fa-close"></i>&nbsp;&nbsp;Exit
+      </button>
+    </div>
+  </div>
+</div>

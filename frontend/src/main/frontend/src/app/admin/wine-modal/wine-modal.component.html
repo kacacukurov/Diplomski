@@ -62,22 +62,27 @@
         </div>
       </div>
       <div class="row" style="margin-top: 2%">
-        <h3>Grapes:</h3>
-        <div class="col-lg-4" *ngIf="firstGrape">
-          <select class="form-control" [(ngModel)]="firstGrape" required>
-            <option *ngFor="let grape of listGrapes" [ngValue]="grape.grapeName">{{grape.grapeName}}</option>
-          </select>
+        <div class="col-lg-6">
+          <div class="row">
+            <h4>Grapes:</h4>
+            <div class="col-lg-8" *ngIf="firstGrape">
+              <select class="form-control" [(ngModel)]="firstGrape" required>
+                <option *ngFor="let grape of listGrapes" [ngValue]="grape.grapeName">{{grape.grapeName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-1" style="margin-left: 1%">
+              <button type="button" class="btn btn-info" (click)="addGrape()">
+                <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <button type="button" class="btn btn-default" (click)="addGrape()">
-            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4"></div>
+        <div class="col-lg-1"></div>
         <div class="col-lg-4" *ngIf="addedGrapes.length!=0">
-          <div>
+          <div class="table-wrapper-scroll-y">
             <table class="table table-hover table-condensed">
               <tbody>
               <tr *ngFor="let grape of addedGrapes">
@@ -149,27 +154,32 @@
         </div>
       </div>
       <div class="row" style="margin-top: 2%">
-        <h3>Grapes:</h3>
-        <div class="col-lg-4" *ngIf="firstGrape">
-          <select class="form-control" [(ngModel)]="firstGrape" required>
-            <option *ngFor="let grape of listGrapes" [ngValue]="grape.grapeName">{{grape.grapeName}}</option>
-          </select>
+        <div class="col-lg-6">
+          <div class="row">
+            <h4>Grapes:</h4>
+            <div class="col-lg-8" *ngIf="firstGrape">
+              <select class="form-control" [(ngModel)]="firstGrape" required>
+                <option *ngFor="let grape of listGrapes" [ngValue]="grape.grapeName">{{grape.grapeName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-1" style="margin-left: 1%">
+              <button type="button" class="btn btn-info" (click)="addGrape()">
+                <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <button type="button" class="btn btn-default" (click)="addGrape()">
-            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4"></div>
+        <div class="col-lg-1"></div>
         <div class="col-lg-4" *ngIf="addedGrapes.length!=0">
-          <div>
+          <div class="table-wrapper-scroll-y">
             <table class="table table-hover table-condensed">
               <tbody>
-              <tr *ngFor="let gr of addedGrapes">
-                <td>{{gr.grapeName}}</td>
-                <td><button type="button" class="btn btn-default" (click)="removeGrape(gr)">
+              <tr *ngFor="let grape of addedGrapes">
+                <td>{{grape.grapeName}}</td>
+                <td><button type="button" class="btn btn-default" (click)="removeGrape(grape)">
                   <i class="fa fa-trash"></i>
                 </button>
                 </td>

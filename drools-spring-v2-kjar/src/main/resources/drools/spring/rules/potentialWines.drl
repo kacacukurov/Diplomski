@@ -953,6 +953,19 @@ rule "Needed Cabernet Franc for Potential Super tuscan"
         $potentialWine.getGrapeDTOS().add(new GrapeDTO($franc));
 end
 
+rule "Needed Sangiovese for Potential Super tuscan"
+    agenda-group "potential-wines"
+    salience -100
+    when
+        $wdto: WineDTO(wineName == "Super tuscan")
+        $potentialWine: MissingGrapesDTO(wineDTO == $wdto);
+        $gl: GrapeList($grapeList: grapeLists);
+        $sang: Grape(grapeName == "Sangiovese")
+        $missing: Grape(grapeName == "Sangiovese", $grapeList not contains $sang);
+    then
+        $potentialWine.getGrapeDTOS().add(new GrapeDTO($sang));
+end
+
 rule "Needed Cabernet Franc for Potential Meritage"
     agenda-group "potential-wines"
     salience -100

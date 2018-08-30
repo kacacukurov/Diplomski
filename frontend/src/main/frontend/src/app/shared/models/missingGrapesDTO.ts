@@ -2,6 +2,6 @@ import {grapeDTO} from "./grapeDTO";
 import {wineDTO} from "./wineDTO";
 
 export class missingGrapesDTO{
-  grapeDTOs: Array<grapeDTO>;
+  grapeDTOS: Array<grapeDTO>;
   wineDTO: wineDTO;
 }

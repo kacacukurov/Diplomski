@@ -1,3 +1,81 @@
-<p>
-  find-wines-and-grapes works!
-</p>
+<div class="container-fluid">
+  <div class="row" style="margin-bottom: 2%">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4"><h4>Add grapes you want and see which are missing for which wine:</h4></div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-1"><button class="btn btn-success" (click)="getWine()">Calculate</button></div>
+    <div class="col-lg-1"><button class="btn btn-danger" (click)="clearAll()">Reset</button></div>
+  </div>
+  <div *ngIf="listGrapes.length == 0">
+    <div class="row">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-4"><h4>There are no grapes!</h4></div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-5">
+      <div class="table-wrapper-scroll-y">
+        <table class="table table-dark">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Grape name</th>
+            <th scope="col">Add to list</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let grape of listGrapes">
+            <th scope="row">{{grape.id}}</th>
+            <td>{{grape.grapeName}}</td>
+            <td><button class="btn btn-info" (click)="addGrape(grape)">&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;&nbsp;</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="table-wrapper-scroll-y">
+        <table class="table table-dark">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Wine name</th>
+            <th scope="col">About wine</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let possible of posibleWinesAndGrapes">
+            <th scope="row">{{possible.wineDTO.id}}</th>
+            <td>{{possible.wineDTO.wineName}}</td>
+            <td><button class="btn btn-info" (click)="moreAboutWine(possible)">&nbsp;&nbsp;<i class="fa fa-info-circle"></i>&nbsp;&nbsp;</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <br/>
+      <div class="table-wrapper-scroll-y">
+        <table class="table table-dark">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Grape name</th>
+            <th scope="col">Remove from list</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let grape of listChonesGrapes">
+            <th scope="row">{{grape.id}}</th>
+            <td>{{grape.grapeName}}</td>
+            <td><button class="btn btn-danger" (click)="removeGrape(grape)">&nbsp;&nbsp;<i class="fa fa-trash"></i>&nbsp;&nbsp;</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+
+</div>
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>

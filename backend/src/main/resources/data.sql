@@ -175,3 +175,195 @@ insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, 
 values(118, 0, null, 1, 1, 0, 1, 'Champagne', 1, null, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
 values(119, 0, null, 1, 1, 0, 1, 'Cava', 1, null, null);
+
+
+-- WINE_GRAPES
+  -- Chateauneuf-du-pape
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 106);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 107);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 108);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 109);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 110);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 111);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 112);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 113);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 114);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 115);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 116);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 117);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 118);
+insert into wine_grapes(wine_id, grapes_id)
+values(102, 119);
+  -- Red bordeaux
+insert into wine_grapes(wine_id, grapes_id)
+values(101, 101);
+insert into wine_grapes(wine_id, grapes_id)
+values(101, 102);
+insert into wine_grapes(wine_id, grapes_id)
+values(101, 103);
+insert into wine_grapes(wine_id, grapes_id)
+values(101, 104);
+insert into wine_grapes(wine_id, grapes_id)
+values(101, 105);
+  -- White bordeaux
+insert into wine_grapes(wine_id, grapes_id)
+values(103, 120);
+insert into wine_grapes(wine_id, grapes_id)
+values(103, 121);
+insert into wine_grapes(wine_id, grapes_id)
+values(103, 122);
+  -- Red bourgogne
+insert into wine_grapes(wine_id, grapes_id)
+values(104, 123);
+insert into wine_grapes(wine_id, grapes_id)
+values(104, 124);
+  -- White bourgogne
+insert into wine_grapes(wine_id, grapes_id)
+values(105, 125);
+insert into wine_grapes(wine_id, grapes_id)
+values(105, 126);
+  -- Red rhone
+insert into wine_grapes(wine_id, grapes_id)
+values(106, 106);
+insert into wine_grapes(wine_id, grapes_id)
+values(106, 107);
+insert into wine_grapes(wine_id, grapes_id)
+values(106, 108);
+  -- White rhone
+insert into wine_grapes(wine_id, grapes_id)
+values(107, 127);
+insert into wine_grapes(wine_id, grapes_id)
+values(107, 117);
+insert into wine_grapes(wine_id, grapes_id)
+values(107, 128);
+insert into wine_grapes(wine_id, grapes_id)
+values(107, 129);
+insert into wine_grapes(wine_id, grapes_id)
+values(107, 113);
+insert into wine_grapes(wine_id, grapes_id)
+values(107, 109);
+  -- Soave
+insert into wine_grapes(wine_id, grapes_id)
+values(108, 131);
+insert into wine_grapes(wine_id, grapes_id)
+values(108, 132);
+insert into wine_grapes(wine_id, grapes_id)
+values(108, 125);
+insert into wine_grapes(wine_id, grapes_id)
+values(108, 133);
+  -- Chianti
+insert into wine_grapes(wine_id, grapes_id)
+values(109, 134);
+insert into wine_grapes(wine_id, grapes_id)
+values(109, 102);
+insert into wine_grapes(wine_id, grapes_id)
+values(109, 103);
+  -- Super tuscan
+insert into wine_grapes(wine_id, grapes_id)
+values(110, 101);
+insert into wine_grapes(wine_id, grapes_id)
+values(110, 102);
+insert into wine_grapes(wine_id, grapes_id)
+values(110, 134);
+insert into wine_grapes(wine_id, grapes_id)
+values(110, 103);
+insert into wine_grapes(wine_id, grapes_id)
+values(110, 107);
+  -- Amarone della valpolicella
+insert into wine_grapes(wine_id, grapes_id)
+values(111, 135);
+insert into wine_grapes(wine_id, grapes_id)
+values(111, 136);
+insert into wine_grapes(wine_id, grapes_id)
+values(111, 137);
+  -- Rioja
+insert into wine_grapes(wine_id, grapes_id)
+values(112, 138);
+insert into wine_grapes(wine_id, grapes_id)
+values(112, 139);
+insert into wine_grapes(wine_id, grapes_id)
+values(112, 140);
+insert into wine_grapes(wine_id, grapes_id)
+values(112, 141);
+  -- White rioja
+insert into wine_grapes(wine_id, grapes_id)
+values(113, 142);
+insert into wine_grapes(wine_id, grapes_id)
+values(113, 143);
+insert into wine_grapes(wine_id, grapes_id)
+values(113, 144);
+insert into wine_grapes(wine_id, grapes_id)
+values(113, 145);
+  -- Priorat
+insert into wine_grapes(wine_id, grapes_id)
+values(114, 106);
+insert into wine_grapes(wine_id, grapes_id)
+values(114, 107);
+insert into wine_grapes(wine_id, grapes_id)
+values(114, 146);
+insert into wine_grapes(wine_id, grapes_id)
+values(114, 101);
+insert into wine_grapes(wine_id, grapes_id)
+values(114, 102);
+  -- Meritage
+insert into wine_grapes(wine_id, grapes_id)
+values(115, 101);
+insert into wine_grapes(wine_id, grapes_id)
+values(115, 102);
+insert into wine_grapes(wine_id, grapes_id)
+values(115, 103);
+insert into wine_grapes(wine_id, grapes_id)
+values(115, 104);
+insert into wine_grapes(wine_id, grapes_id)
+values(115, 105);
+insert into wine_grapes(wine_id, grapes_id)
+values(115, 147);
+  -- Port
+insert into wine_grapes(wine_id, grapes_id)
+values(116, 148);
+insert into wine_grapes(wine_id, grapes_id)
+values(116, 149);
+insert into wine_grapes(wine_id, grapes_id)
+values(116, 150);
+insert into wine_grapes(wine_id, grapes_id)
+values(116, 151);
+insert into wine_grapes(wine_id, grapes_id)
+values(116, 157);
+  -- Provence rose
+insert into wine_grapes(wine_id, grapes_id)
+values(117, 110);
+insert into wine_grapes(wine_id, grapes_id)
+values(117, 106);
+insert into wine_grapes(wine_id, grapes_id)
+values(117, 107);
+insert into wine_grapes(wine_id, grapes_id)
+values(117, 152);
+  -- Champagne
+insert into wine_grapes(wine_id, grapes_id)
+values(118, 125);
+insert into wine_grapes(wine_id, grapes_id)
+values(118, 153);
+insert into wine_grapes(wine_id, grapes_id)
+values(118, 123);
+  -- Cava
+insert into wine_grapes(wine_id, grapes_id)
+values(119, 154);
+insert into wine_grapes(wine_id, grapes_id)
+values(119, 155);
+insert into wine_grapes(wine_id, grapes_id)
+values(119, 156);
+insert into wine_grapes(wine_id, grapes_id)
+values(119, 125);

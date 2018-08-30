@@ -2,7 +2,6 @@ import rs.uns.ac.ftn.Diplomski.model.Wine
 import rs.uns.ac.ftn.Diplomski.model.Grape
 import rs.uns.ac.ftn.Diplomski.model.drl.GrapeList
 import rs.uns.ac.ftn.Diplomski.model.drl.PossibleWines
-import rs.uns.ac.ftn.Diplomski.service.WineService
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ rule "Grapes for Chateauneuf-du-pape"
     agenda-group "wines"
     lock-on-active
     when
-        $wineService: WineService();
         $cdp: Wine(wineName == "Chateauneuf-du-pape");
         $pb: PossibleWines();
         $gl: GrapeList($grapeList: grapeLists);
