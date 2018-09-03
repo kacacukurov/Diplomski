@@ -10,6 +10,7 @@ import {grapeListDTO} from "../../shared/models/grapeListDTO";
 import {wineDTO} from "../../shared/models/wineDTO";
 import {missingGrapesDTO} from "../../shared/models/missingGrapesDTO";
 import {grapeDTO} from "../../shared/models/grapeDTO";
+import {filterDTO} from "../../shared/models/filterDTO";
 
 @Injectable()
 export class DroolsService {
@@ -28,6 +29,10 @@ export class DroolsService {
 
   getPotentialWines(grapeListDTO: grapeListDTO): Observable<Array<missingGrapesDTO>> {
     return this.http.post<grapeListDTO>(`${this.urlBase}/findPotentialWineAndGrapes`, grapeListDTO).catch(this.handleErrors);
+  }
+
+  filterWines(filterDTO: filterDTO): Observable<Array<wineDTO>> {
+    return this.http.post<filterDTO>(`${this.urlBase}/filterWines`, filterDTO).catch(this.handleErrors);
   }
 
   protected handleErrors(response: Response) {

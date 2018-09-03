@@ -7,6 +7,10 @@ import rs.uns.ac.ftn.Diplomski.model.Grape;
 import rs.uns.ac.ftn.Diplomski.model.Wine;
 import rs.uns.ac.ftn.Diplomski.model.drl.GrapeList;
 import rs.uns.ac.ftn.Diplomski.model.drl.PossibleWines;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineBody;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineColor;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineFlavor;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineSugar;
 import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO;
 import rs.uns.ac.ftn.Diplomski.web.dto.GrapeListDTO;
 import rs.uns.ac.ftn.Diplomski.web.dto.MissingGrapesDTO;
@@ -81,5 +85,29 @@ public class DroolsService {
         kieSession.destroy();
 
         return potentialWinesDTO.getMissingGrapesDTOS();
+    }
+
+    public List<Wine> filterWines(WineBody body, WineColor color, WineSugar sugar, WineFlavor flavor){
+
+        for(Wine w: this.wineService.findAll()) {
+            kieSession.insert(w);
+        }
+        if(body != null)
+            kieSession.insert(body);
+        if(color != null)
+            kieSession.insert(color);
+        if(sugar != null)
+            kieSession.insert(sugar);
+        if(flavor != null)
+            kieSession.insert(flavor);
+
+        PossibleWines possibleWines = new PossibleWines();
+        kieSession.insert(possibleWines);
+
+        kieSession.getAgenda().getAgendaGroup("filter").setFocus();
+        System.out.println(kieSession.fireAllRules());
+        kieSession.destroy();
+        return possibleWines.getWines();
+
     }
 }

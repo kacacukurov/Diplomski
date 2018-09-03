@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row" style="margin-bottom: 2%">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-1" style="margin-left: 1%"><h4>Body:</h4></div>
+    <div class="col-lg-3">
+      <select class="form-control" [(ngModel)]="wineBody">
+        <option *ngFor="let body of bodies" [value]="body">{{body}}</option>
+      </select>
+    </div>
+    <div class="col-lg-1"><h4>Color:</h4></div>
+    <div class="col-lg-3">
+      <select class="form-control" [(ngModel)]="wineColor">
+        <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+      </select>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-1" style="margin-left: -2%">
+      <button class="btn btn-success" (click)="filter()">Filter</button>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 2%">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-1" style="margin-left: 1%"><h4>Sugar:</h4></div>
+    <div class="col-lg-3">
+      <select class="form-control" [(ngModel)]="wineSugar">
+        <option *ngFor="let sugar of sugars" [value]="sugar">{{sugar}}</option>
+      </select>
+    </div>
+    <div class="col-lg-1"><h4>Flavor:</h4></div>
+    <div class="col-lg-3">
+      <select class="form-control" [(ngModel)]="wineFlavor">
+        <option *ngFor="let flavor of flavors" [value]="flavor">{{flavor}}</option>
+      </select>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-1" style="margin-left: -2%">
+      <button class="btn btn-danger" (click)="reset()">Clear</button>
+    </div>
+  </div>
+  <div *ngIf="listWines.length == 0">
+    <div class="row">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-4"><h4>There are no wines!</h4></div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+  <div *ngFor="let wine of listWines">
+    <div class="card-body row bg-dark">
+      <span class="col-lg-1"></span>
+      <h5  class="col-sm-3" style="color: white">{{wine.wineName}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineBody}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineColor}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineSugar}}</h5>
+      <h5  class="col-sm-1" style="color: white">{{wine.wineFlavor}}</h5>
+      <span class="col-sm-2"></span>
+      <span class="col-sm-1">
+        <button class="btn btn-info" (click)="moreAboutWine(wine)">More</button>
+      </span>
+    </div>
+    <br>
+  </div>
+  <br/>
+
+</div>
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>

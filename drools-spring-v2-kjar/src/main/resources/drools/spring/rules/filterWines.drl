@@ -1,0 +1,298 @@
+import rs.uns.ac.ftn.Diplomski.model.Wine
+import rs.uns.ac.ftn.Diplomski.model.Grape
+import rs.uns.ac.ftn.Diplomski.model.drl.PossibleWines
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineColor
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineBody
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineSugar
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineFlavor
+import rs.uns.ac.ftn.Diplomski.web.dto.GrapeListDTO
+import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO
+
+
+rule "find all wines with specific body"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody();
+        not WineSugar() and not WineFlavor() and not WineColor();
+        hasBody($wineId, $b;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("body");
+end
+
+query hasBody(Long wineId, WineBody body)
+    Wine(wineId, body;);
+end
+
+rule "find all wines with specific color"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $c: WineColor();
+        not WineSugar() and not WineFlavor() and not WineBody();
+        hasColor($wineId, $c;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("color");
+end
+
+query hasColor(Long wineId, WineColor color)
+    Wine(wineId, WineBody, color;)
+end
+
+rule "find all wines with specific flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $f: WineFlavor();
+        not WineSugar() and not WineColor() and not WineBody();
+        hasFlavor($wineId, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("flavor");
+end
+
+query hasFlavor(Long wineId, WineFlavor flavor)
+    Wine(wineId, WineBody, WineColor, WineSugar, flavor;)
+end
+
+rule "find all wines with specific sugar"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $s: WineSugar();
+        not WineColor() and not WineFlavor() and not WineBody();
+        hasSugar($wineId, $s;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("sugar");
+end
+
+query hasSugar(Long wineId, WineSugar sugar)
+    Wine(wineId, WineBody, WineColor, sugar;)
+end
+
+rule "find all wines with specific body and color"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody()
+        $c: WineColor();
+        not WineSugar() and not WineFlavor();
+        hasBodyAndColor($wineId, $b, $c;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("body and color");
+end
+
+query hasBodyAndColor(Long wineId, WineBody body, WineColor color)
+    hasBody(wineId, body;);
+    hasColor(wineId, color;);
+end
+
+rule "find all wines with specific body and sugar"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody()
+        $s: WineSugar();
+        not WineColor() and not WineFlavor();
+        hasBodyAndSugar($wineId, $b, $s;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println(" body and sugar");
+end
+
+query hasBodyAndSugar(Long wineId, WineBody body, WineSugar sugar)
+    hasBody(wineId, body;);
+    hasSugar(wineId, sugar;);
+end
+
+rule "find all wines with specific body and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody()
+        $f: WineFlavor()
+        not WineSugar() and not WineColor();
+        hasBodyAndFlavor($wineId, $b, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("body and flavor");
+end
+
+query hasBodyAndFlavor(Long wineId, WineBody body, WineFlavor flavor)
+    hasBody(wineId, body;);
+    hasFlavor(wineId, flavor;);
+end
+
+rule "find all wines with specific color and sugar"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $s: WineSugar()
+        $c: WineColor()
+        not WineBody() and not WineFlavor();
+        hasColorAndSugar($wineId, $c, $s;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("color and sugar");
+end
+
+query hasColorAndSugar(Long wineId, WineColor color, WineSugar sugar)
+    hasColor(wineId, color;);
+    hasSugar(wineId, sugar;);
+end
+
+rule "find all wines with specific color and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $f: WineFlavor()
+        $c: WineColor()
+        not WineBody() and not WineSugar();
+        hasColorAndFlavor($wineId, $c, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("color and flavor");
+end
+
+query hasColorAndFlavor(Long wineId, WineColor color, WineFlavor flavor)
+    hasColor(wineId, color;);
+    hasFlavor(wineId, flavor;);
+end
+
+rule "find all wines with specific sugar and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $f: WineFlavor()
+        $s: WineSugar()
+        not WineBody() and not WineColor();
+        hasSugarAndFlavor($wineId, $s, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("sugar and flavor");
+end
+
+query hasSugarAndFlavor(Long wineId, WineSugar sugar, WineFlavor flavor)
+    hasFlavor(wineId, flavor;);
+    hasSugar(wineId, sugar;);
+end
+
+rule "find all wines with specific body and color and sugar"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody()
+        $c: WineColor()
+        $s: WineSugar()
+        not WineFlavor();
+        hasBodyAndColorAndSugar($wineId, $b, $c, $s;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("body and color and sugar");
+end
+
+query hasBodyAndColorAndSugar(Long wineId, WineBody body, WineColor color, WineSugar sugar)
+    hasBody(wineId, body;);
+    hasColor(wineId, color;);
+    hasSugar(wineId, sugar;);
+end
+
+rule "find all wines with specific body and color and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody()
+        $c: WineColor()
+        $f: WineFlavor()
+        not WineSugar();
+        hasBodyAndColorAndFlavor($wineId, $b, $c, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("body and color and flavor");
+end
+
+query hasBodyAndColorAndFlavor(Long wineId, WineBody body, WineColor color, WineFlavor flavor)
+    hasBody(wineId, body;);
+    hasColor(wineId, color;);
+    hasFlavor(wineId, flavor;);
+end
+
+rule "find all wines with specific body and sugar and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $b: WineBody()
+        $s: WineSugar()
+        $f: WineFlavor()
+        not WineColor();
+        hasBodyAndSugarAndFlavor($wineId, $b, $s, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("body and sugar and flavor");
+end
+
+query hasBodyAndSugarAndFlavor(Long wineId, WineBody body, WineSugar sugar, WineFlavor flavor)
+    hasBody(wineId, body;);
+    hasFlavor(wineId, flavor;);
+    hasSugar(wineId, sugar;);
+end
+
+rule "find all wines with specific color and sugar and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $c: WineColor()
+        $s: WineSugar()
+        $f: WineFlavor()
+        not WineBody();
+        hasColorAndSugarAndFlavor($wineId, $c, $s, $f;)
+        $pb: PossibleWines($wines: wines)
+    then
+        $wines.add($w);
+        System.out.println("color and sugar and flavor");
+end
+
+query hasColorAndSugarAndFlavor(Long wineId, WineColor color, WineSugar sugar, WineFlavor flavor)
+    hasColor(wineId, color;);
+    hasFlavor(wineId, flavor;);
+    hasSugar(wineId, sugar;);
+end
+
+rule "find all wines with specific body and color and sugar and flavor"
+    agenda-group "filter"
+    when
+        $w: Wine($wineId: id);
+        $c: WineColor();
+        $s: WineSugar();
+        $f: WineFlavor();
+        $b: WineBody();
+        hasBodyAndColorAndSugarAndFlavor($wineId, $b, $c, $s, $f;);
+        $pb: PossibleWines($wines: wines);
+    then
+        System.out.println("body and color and sugar and flavor: ");
+        $wines.add($w);
+end
+
+query hasBodyAndColorAndSugarAndFlavor(Long wineId, WineBody body, WineColor color, WineSugar sugar, WineFlavor flavor)
+    hasBody(wineId, body;);
+    hasColor(wineId, color;);
+    hasFlavor(wineId, flavor;);
+    hasSugar(wineId, sugar;);
+end

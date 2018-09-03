@@ -5,19 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rs.uns.ac.ftn.Diplomski.model.Grape;
 import rs.uns.ac.ftn.Diplomski.model.Wine;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineBody;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineColor;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineFlavor;
+import rs.uns.ac.ftn.Diplomski.model.enumeration.WineSugar;
 import rs.uns.ac.ftn.Diplomski.service.DroolsService;
 import rs.uns.ac.ftn.Diplomski.service.GrapeService;
 import rs.uns.ac.ftn.Diplomski.service.WineService;
-import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO;
-import rs.uns.ac.ftn.Diplomski.web.dto.GrapeListDTO;
-import rs.uns.ac.ftn.Diplomski.web.dto.MissingGrapesDTO;
-import rs.uns.ac.ftn.Diplomski.web.dto.WineDTO;
+import rs.uns.ac.ftn.Diplomski.web.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,4 +92,35 @@ public class DroolsController {
         return new ResponseEntity<>(potencialWineAndGrapes, HttpStatus.OK);
 
     }
+
+    @RequestMapping(
+            value = "/filterWines",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity filterWinesColor(@RequestBody FilterDTO filterDTO) {
+        WineBody wineBody = null;
+        WineColor wineColor = null;
+        WineSugar wineSugar = null;
+        WineFlavor wineFlavor = null;
+        if(filterDTO.getWineBody() != null)
+            wineBody = WineBody.valueOf(filterDTO.getWineBody());
+        if(filterDTO.getWineColor() != null)
+            wineColor = WineColor.valueOf(filterDTO.getWineColor());
+        if(filterDTO.getWineFlavor() != null)
+            wineFlavor = WineFlavor.valueOf(filterDTO.getWineFlavor());
+        if(filterDTO.getWineSugar() != null)
+            wineSugar = WineSugar.valueOf(filterDTO.getWineSugar());
+
+        System.out.println(wineBody + " " + wineColor + " " + wineSugar + " " + wineFlavor);
+
+        List<Wine> wines = this.droolsService.filterWines(wineBody, wineColor, wineSugar, wineFlavor);
+
+        List<WineDTO> wineDTOS = new ArrayList<>();
+        for(Wine wine: wines)
+            wineDTOS.add(new WineDTO(wine));
+
+        return new ResponseEntity<>(wineDTOS, HttpStatus.OK);
+    }
+
 }

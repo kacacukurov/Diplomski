@@ -24,6 +24,9 @@
   <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('USER')">
     <a class="navbar-brand" routerLink="user/wineGrapes">Find W&G</a>
   </div>
+  <div  class="col-lg-1" *ngIf="jwtService.tokenExist() && jwtService.hasRole('USER')">
+    <a class="navbar-brand" routerLink="user/filter">Filter</a>
+  </div>
   <div class="col-lg-5"></div>
 
   <div *ngIf="!jwtService.tokenExist()" class="col-sm-1"><a class="navbar-brand" routerLink="login">Login</a></div>

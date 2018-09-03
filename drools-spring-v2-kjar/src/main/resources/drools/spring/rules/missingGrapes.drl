@@ -1,8 +1,6 @@
 import rs.uns.ac.ftn.Diplomski.model.Wine
 import rs.uns.ac.ftn.Diplomski.model.Grape
 import rs.uns.ac.ftn.Diplomski.model.drl.GrapeList
-import rs.uns.ac.ftn.Diplomski.model.drl.PossibleWines
-import rs.uns.ac.ftn.Diplomski.service.WineService
 import rs.uns.ac.ftn.Diplomski.web.dto.GrapeListDTO
 import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO
 

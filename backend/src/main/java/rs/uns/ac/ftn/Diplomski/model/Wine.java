@@ -9,12 +9,14 @@ import rs.uns.ac.ftn.Diplomski.model.enumeration.WineSugar;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.kie.api.definition.type.Position;
 
 @Entity
 @Table(name = "wine")
 @Where(clause="deleted=0")
 public class Wine {
 
+    @Position(0)
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
@@ -22,15 +24,19 @@ public class Wine {
     @Column(nullable = false)
     private String wineName;
 
+    @Position(1)
     @Column
     private WineBody wineBody;
 
+    @Position(2)
     @Column
     private WineColor wineColor;
 
+    @Position(3)
     @Column
     private WineSugar wineSugar;
 
+    @Position(4)
     @Column
     private WineFlavor wineFlavor;
 
