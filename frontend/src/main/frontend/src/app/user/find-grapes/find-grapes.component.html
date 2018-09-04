@@ -8,8 +8,8 @@
         <option *ngFor="let wine of listWines" [value]="wine.id">{{wine.wineName}}</option>
       </select>
     </div>
-    <div class="col-lg-1"><button class="btn btn-success" [disabled]="!chosenWineId" (click)="getGrapes()">Calculate</button></div>
-    <div class="col-lg-1"><button class="btn btn-danger" (click)="clearAll()">Reset</button></div>
+    <div class="col-lg-1"><button class="btn btn-success" [disabled]="!chosenWineId" (click)="getGrapes()">Find</button></div>
+    <div class="col-lg-1"><button class="btn btn-danger" (click)="clearAll()">Clear</button></div>
   </div>
   <div *ngIf="listGrapes.length == 0">
     <div class="row">

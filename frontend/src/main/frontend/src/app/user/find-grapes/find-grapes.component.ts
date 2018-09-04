@@ -125,7 +125,7 @@ export class FindGrapesComponent implements OnInit {
     this.droolsService.getMissingGrapesForWine(this.missingGrapesDTO).subscribe(data =>{
       this.listFoundGrapes = data;
       if(this.listFoundGrapes.length == 0)
-        this.toasterService.pop('info', 'Info', 'There are no found grapes!');
+        this.toasterService.pop('info', 'Info', 'You can\'t make chosen wine from chosen grapes!');
     },(error: AppError) => {
       if(error instanceof NotFoundError)
         this.toasterService.pop('error', 'Error', 'Wines not found!');
