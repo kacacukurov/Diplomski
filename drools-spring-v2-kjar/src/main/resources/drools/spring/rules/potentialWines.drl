@@ -1,7 +1,11 @@
 import rs.uns.ac.ftn.Diplomski.model.Wine
 import rs.uns.ac.ftn.Diplomski.model.Grape
 import rs.uns.ac.ftn.Diplomski.model.drl.*
-import rs.uns.ac.ftn.Diplomski.web.dto.*
+import rs.uns.ac.ftn.Diplomski.web.dto.MissingGrapesDTO
+import rs.uns.ac.ftn.Diplomski.web.dto.WineDTO
+import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO
+import rs.uns.ac.ftn.Diplomski.web.dto.PotentialWinesDTO
+import rs.uns.ac.ftn.Diplomski.web.dto.MissingGrapesDTO
 
 import java.util.List;
 import java.util.Collections;
