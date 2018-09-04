@@ -94,12 +94,32 @@ public class DroolsService {
         }
         if(body != null)
             kieSession.insert(body);
+        else{
+            kieSession.insert(WineBody.LIGHT);
+            kieSession.insert(WineBody.MEDIUM);
+            kieSession.insert(WineBody.FULL);
+        }
         if(color != null)
             kieSession.insert(color);
+        else{
+            kieSession.insert(WineColor.WHITE);
+            kieSession.insert(WineColor.ROSE);
+            kieSession.insert(WineColor.RED);
+        }
         if(sugar != null)
             kieSession.insert(sugar);
+        else{
+            kieSession.insert(WineSugar.DRY);
+            kieSession.insert(WineSugar.OFFDRY);
+            kieSession.insert(WineSugar.SWEET);
+        }
         if(flavor != null)
             kieSession.insert(flavor);
+        else{
+            kieSession.insert(WineFlavor.DELICATE);
+            kieSession.insert(WineFlavor.MODERATE);
+            kieSession.insert(WineFlavor.STRONG);
+        }
 
         PossibleWines possibleWines = new PossibleWines();
         kieSession.insert(possibleWines);

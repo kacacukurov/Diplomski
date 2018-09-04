@@ -112,8 +112,6 @@ public class DroolsController {
         if(filterDTO.getWineSugar() != null)
             wineSugar = WineSugar.valueOf(filterDTO.getWineSugar());
 
-        System.out.println(wineBody + " " + wineColor + " " + wineSugar + " " + wineFlavor);
-
         List<Wine> wines = this.droolsService.filterWines(wineBody, wineColor, wineSugar, wineFlavor);
 
         List<WineDTO> wineDTOS = new ArrayList<>();
