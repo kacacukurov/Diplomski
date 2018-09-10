@@ -4,22 +4,60 @@ insert into authority (id, type) values (2, 'USER');
 
 
 -- ADMINISTRATORS
-  -- account admin 1
+  -- account admin 1  pass:admin123
 insert into account (id, deleted, password, username, first_name, last_name, version)
-values (101, 0, '$2a$04$NfYZ1tb6cuAQl.DNL76FjeHVXNmiMFtXlA8YWmOpg5H4lcF8jVnlS','kantagara@gmail.com', 'Nikola', 'Garabandic', 0);
+values (101, 0, '$2a$10$cufIyhl6IuaxoWaNcGWgnuWaKYvtZnfvqGHi5J3O25XQHSB592SOS','admin@gmail.com', 'Admin', 'Adminsky', 0);
 insert into account_authority(id, account_id, authority_id) values (101, 101, 1);
-  -- account admin 2
-insert into account (id, deleted, password, username, first_name, last_name, version)
-values (102, 0, '$2a$04$Ie/vN0kYNCWIHU5dwRdRp.KraHKu18S3oXPGjuZPVOQVtIjyniBrK', 'kaca.cukurov@gmail.com', 'Katarina', 'Cukurov', 0);
-insert into account_authority(id, account_id, authority_id) values (102, 102, 1);
 -- USER
-  -- account user 1
+  -- account user 1 pass:user123
 insert into account (id, deleted, password, username, first_name, last_name, version)
-values (103, 0, '$2a$04$Ie/vN0kYNCWIHU5dwRdRp.KraHKu18S3oXPGjuZPVOQVtIjyniBrK','jasminka.cukurov@gmail.com', 'Jasminka', 'Cukurov', 0);
-insert into account_authority(id, account_id, authority_id) values (103, 103, 2);
+values (102, 0, '$2a$04$90Eevy7OcQYKZ4QJEcm0vuXNIh1atOjvv2KAmHovNVVF4jRQEZoJW','user@gmail.com', 'User', 'Usersky', 0);
+insert into account_authority(id, account_id, authority_id) values (102, 102, 2);
 
 
+--  WINERIES
+insert into winery(id, deleted, version, winery_name)
+values(101, 0, 1, 'Bancroft');
+insert into winery(id, deleted, version, winery_name)
+values(102, 0, 1, 'Chateau Margaux Winery');
+insert into winery(id, deleted, version, winery_name)
+values(103, 0, 1, 'Beringer');
+insert into winery(id, deleted, version, winery_name)
+values(104, 0, 1, 'Congress Springs');
+insert into winery(id, deleted, version, winery_name)
+values(105, 0, 1, 'D Anjou');
+insert into winery(id, deleted, version, winery_name)
+values(106, 0, 1, 'Foxen');
+insert into winery(id, deleted, version, winery_name)
+values(107, 0, 1, 'Kathryn Kennedy');
+insert into winery(id, deleted, version, winery_name)
+values(108, 0, 1, 'Longridge');
+insert into winery(id, deleted, version, winery_name)
+values(109, 0, 1, 'Santa Cruz Mountain Vineyard');
 
+--  REGIONS
+insert into region(id, deleted, locatedin, region_name, version)
+values(101, 0, null, 'US region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(102, 0, null, 'French region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(103, 0, null, 'Italian region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(104, 0, 109, 'Medoc region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(105, 0, 101, 'California region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(106, 0, 105, 'Napa region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(107, 0, 105, 'Santa Cruz Mountains region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(108, 0, 102, 'Bourgogne region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(109, 0, 102, 'Bordeaux region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(110, 0, 103, 'Chianti region', 1);
+insert into region(id, deleted, locatedin, region_name, version)
+values(111, 0, null, 'Spain region', 1);
 
 -- GRAPES
 insert into grape(id, deleted, grape_name, version)
@@ -138,43 +176,43 @@ values(157, 0, 'Tinta Barroca', 1);
 
 -- WINES
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(101, 0, null, 1, 1, 2, 1, 'Red bordeaux', 1, null, null);
+values(101, 0, null, 1, 1, 2, 1, 'Red bordeaux', 0, 102, 105);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(102, 0, null, 1, 1, 2, 1, 'Chateauneuf-du-pape', 1, null, null);
+values(102, 0, null, 1, 2, 2, 2, 'Chateauneuf-du-pape', 2, 102, 105);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(103, 0, null, 1, 1, 0, 1, 'White bordeaux', 1, null, null);
+values(103, 0, null, 1, 2, 0, 0, 'White bordeaux', 0, 102, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(104, 0, null, 1, 1, 2, 1, 'Red bourgogne', 1, null, null);
+values(104, 0, null, 1, 0, 2, 1, 'Red bourgogne', 1, 102, 105);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(105, 0, null, 1, 1, 0, 1, 'White bourgogne', 1, null, null);
+values(105, 0, null, 1, 0, 0, 1, 'White bourgogne', 1, 102, 105);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(106, 0, null, 1, 1, 2, 1, 'Red rhone', 1, null, null);
+values(106, 0, null, 1, 2, 2, 2, 'Red rhone', 1, 101, 107);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(107, 0, null, 1, 1, 0, 1, 'White rhone', 1, null, null);
+values(107, 0, null, 1, 0, 0, 1, 'White rhone', 1, 101, 107);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(108, 0, null, 1, 1, 0, 1, 'Soave', 1, null, null);
+values(108, 0, null, 1, 0, 0, 0, 'Soave', 2, 103, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(109, 0, null, 1, 1, 2, 1, 'Chianti', 1, null, null);
+values(109, 0, null, 1, 2, 2, 2, 'Chianti', 2, 103, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(110, 0, null, 1, 1, 2, 1, 'Super tuscan', 1, null, null);
+values(110, 0, null, 1, 2, 2, 2, 'Super tuscan', 0, 103, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(111, 0, null, 1, 1, 2, 1, 'Amarone della valpolicella', 1, null, null);
+values(111, 0, null, 1, 2, 2, 2, 'Amarone della valpolicella', 0, 103, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(112, 0, null, 1, 1, 2, 1, 'Rioja', 1, null, null);
+values(112, 0, null, 1, 2, 2, 1, 'Rioja', 1, 111, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(113, 0, null, 1, 1, 0, 1, 'White rioja', 1, null, null);
+values(113, 0, null, 1, 2, 0, 2, 'White rioja', 2, 111, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(114, 0, null, 1, 1, 2, 1, 'Priorat', 1, null, null);
+values(114, 0, null, 1, 1, 2, 1, 'Priorat', 1, 111, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(115, 0, null, 1, 1, 2, 1, 'Meritage', 1, null, null);
+values(115, 0, null, 1, 1, 2, 0, 'Meritage', 2, 101, 109);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(116, 0, null, 1, 1, 2, 1, 'Port', 1, null, null);
+values(116, 0, null, 1, 2, 2, 2, 'Port', 0, 111, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(117, 0, null, 1, 1, 1, 1, 'Provence rose', 1, null, null);
+values(117, 0, null, 1, 1, 1, 1, 'Provence rose', 1, 102, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(118, 0, null, 1, 1, 0, 1, 'Champagne', 1, null, null);
+values(118, 0, null, 1, 0, 0, 0, 'Champagne', 1, 102, null);
 insert into wine(id, deleted, subclass_of_wine, version, wine_body, wine_color, wine_flavor, wine_name, wine_sugar, region_id, winery_id)
-values(119, 0, null, 1, 1, 0, 1, 'Cava', 1, null, null);
+values(119, 0, null, 1, 1, 0, 1, 'Cava', 2, 111, null);
 
 
 -- WINE_GRAPES

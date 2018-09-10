@@ -13,9 +13,9 @@
   </div>
   <div *ngFor="let region of listRegions">
     <div class="card-body row bg-dark">
-      <h5  class="col-sm-2" style="color: white">{{region.regionName}}</h5>
-      <h5  class="col-sm-2" style="color: white">{{region.locatedIn}}</h5>
-      <span class="col-sm-5"></span>
+      <h5  class="col-sm-3" style="color: white">{{region.regionName}}</h5>
+      <h5  class="col-sm-3" style="color: white">{{region.locatedIn}}</h5>
+      <span class="col-sm-3"></span>
       <span class="col-sm-1">
         <button class="btn btn-info" (click)="changeRegion(region)">Change</button>
       </span>

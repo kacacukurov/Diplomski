@@ -13,8 +13,8 @@
   </div>
   <div *ngFor="let winery of listWineries">
     <div class="card-body row bg-dark">
-      <h5  class="col-sm-2" style="color: white">{{winery.wineryName}}</h5>
-      <span class="col-sm-7"></span>
+      <h5  class="col-sm-4" style="color: white">{{winery.wineryName}}</h5>
+      <span class="col-sm-5"></span>
       <span class="col-sm-1">
         <button class="btn btn-danger" (click)="deleteWinery(winery)">Delete</button>
       </span>

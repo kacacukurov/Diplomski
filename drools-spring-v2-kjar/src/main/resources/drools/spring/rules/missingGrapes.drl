@@ -8,7 +8,6 @@ import java.util.List;
 
 rule "Find grapes for chosen wine"
     agenda-group "missing-grapes"
-    salience 10
     when
         $wine: Wine($allGrapes: grapes, $name: wineName);
         $gl: GrapeList($usersGrapes: grapeLists);

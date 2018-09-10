@@ -7,7 +7,6 @@ import java.util.List;
 
 rule "Find wine that has all grapes"
     agenda-group "wines"
-    salience 10
     when
         $wine: Wine($allGrapes: grapes, $name: wineName);
         $pb: PossibleWines();

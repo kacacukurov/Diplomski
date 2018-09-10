@@ -13,7 +13,6 @@ import java.util.Collections;
 // WINE TO BE POTENTIAL HAS TO HAVE AT LEAST ONE GRAPE
 rule "Find potential wine"
     agenda-group "potential-wines"
-    salience 10
     when
         $wine: Wine($allGrapes: grapes, $name: wineName);
         $pw: PotentialWinesDTO();
