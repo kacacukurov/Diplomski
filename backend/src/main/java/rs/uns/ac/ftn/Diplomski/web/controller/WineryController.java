@@ -19,6 +19,10 @@ public class WineryController {
     @Autowired
     private WineryService wineryService;
 
+    /**
+     * Method that receives winery name and calls winery service which makes new winery in database.
+     * @param wineryName winery name
+     */
     @RequestMapping(
             value = "/new",
             method = RequestMethod.POST,
@@ -35,6 +39,10 @@ public class WineryController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    /**
+     * Method that returns list of all wineries from database.
+     * @return wineryDTOS
+     */
     @RequestMapping(
             value = "/all",
             method = RequestMethod.GET,
@@ -49,6 +57,10 @@ public class WineryController {
         return new ResponseEntity<>(wineryDTOS, HttpStatus.OK);
     }
 
+    /**
+     * Method that receives winery id and calls winery service which than deletes corresponding winery.
+     * @param id winery id
+     */
     @RequestMapping(
             value = "/",
             method = RequestMethod.DELETE,

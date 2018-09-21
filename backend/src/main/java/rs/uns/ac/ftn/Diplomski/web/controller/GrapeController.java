@@ -19,6 +19,10 @@ public class GrapeController {
     @Autowired
     private GrapeService grapeService;
 
+    /**
+     * Method that receives grape name and calls grape service which makes new grape in database.
+     * @param grapeName grape name
+     */
     @RequestMapping(
             value = "/new",
             method = RequestMethod.POST,
@@ -35,6 +39,10 @@ public class GrapeController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    /**
+     * Method that returns list of all grapes from database.
+     * @return grapeDTOS
+     */
     @RequestMapping(
             value = "/all",
             method = RequestMethod.GET,
@@ -48,6 +56,10 @@ public class GrapeController {
         return new ResponseEntity<>(grapeDTOS, HttpStatus.OK);
     }
 
+    /**
+     * Method that receives grape id and calls grape service which than deletes corresponding grape.
+     * @param id grape id
+     */
     @RequestMapping(
             value = "/",
             method = RequestMethod.DELETE,

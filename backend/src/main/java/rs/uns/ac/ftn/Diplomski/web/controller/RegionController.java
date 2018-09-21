@@ -20,6 +20,12 @@ public class RegionController {
     @Autowired
     private RegionService regionService;
 
+    /**
+     * Method that receives necessary data for new region, calls region service which then creates new region in
+     * database.
+     * @param newRegionDTO new region data
+     * @return newRegionDTO
+     */
     @RequestMapping(
             value = "/new",
             method = RequestMethod.POST,
@@ -43,6 +49,12 @@ public class RegionController {
         return new ResponseEntity<>(newRegionDTO, HttpStatus.CREATED);
     }
 
+    /**
+     * Method that receives changed data of one existing region, calls region service which then saves changes
+     * to database.
+     * @param regionDTO changed data for region
+     * @return regionDTO
+     */
     @RequestMapping(
             value = "/change",
             method = RequestMethod.PUT,
@@ -73,6 +85,10 @@ public class RegionController {
         return new ResponseEntity<>(regionDTO, HttpStatus.CREATED);
     }
 
+    /**
+     * Method that returns list of all regions from database.
+     * @return regionDTOS
+     */
     @RequestMapping(
             value = "/all",
             method = RequestMethod.GET,
@@ -96,6 +112,10 @@ public class RegionController {
         return new ResponseEntity<>(regionDTOS, HttpStatus.OK);
     }
 
+    /**
+     * Method that receives region id and calls region service which than deletes corresponding region.
+     * @param id region id
+     */
     @RequestMapping(
             value = "/",
             method = RequestMethod.DELETE,

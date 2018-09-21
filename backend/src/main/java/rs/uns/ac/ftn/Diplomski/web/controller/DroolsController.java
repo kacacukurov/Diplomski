@@ -33,6 +33,12 @@ public class DroolsController {
     @Autowired
     private GrapeService grapeService;
 
+    /**
+     * Method which receives list of grapes and calls drools service which then returns possible wines that could
+     * be made from those grapes.
+     * @param grapeListDTO list of grapes
+     * @return wineDTOS
+     */
     @RequestMapping(
             value = "/findWines",
             method = RequestMethod.POST,
@@ -55,6 +61,12 @@ public class DroolsController {
 
     }
 
+    /**
+     * Method which receives list of grapes and one wine and calls drools service which then returns list of grapes
+     * that are missing for that chosen wine.
+     * @param missingGrapesDTO list of grapes and one wine
+     * @return missingGrapes
+     */
     @RequestMapping(
             value = "/findMissingGrapes",
             method = RequestMethod.POST,
@@ -75,6 +87,12 @@ public class DroolsController {
 
     }
 
+    /**
+     * Method which receives list of grapes and calls drools service which then returns list of wines that could be
+     * made from those grapes, and for each wine list of missing grapes.
+     * @param grapeListDTO list of grapes
+     * @return potentialWineAndGrapes
+     */
     @RequestMapping(
             value = "/findPotentialWineAndGrapes",
             method = RequestMethod.POST,
@@ -87,12 +105,18 @@ public class DroolsController {
             grapes.add(this.grapeService.findOne(grapeDTO.getId()));
         }
 
-        List<MissingGrapesDTO> potencialWineAndGrapes = this.droolsService.getPotentialWines(grapes);
+        List<MissingGrapesDTO> potentialWineAndGrapes = this.droolsService.getPotentialWines(grapes);
 
-        return new ResponseEntity<>(potencialWineAndGrapes, HttpStatus.OK);
+        return new ResponseEntity<>(potentialWineAndGrapes, HttpStatus.OK);
 
     }
 
+    /**
+     * Method which receives list of filters and then calls drools service which returns list of wines that
+     * correspond to those filters.
+     * @param filterDTO list of values of cho
+     * @return wineDTOS
+     */
     @RequestMapping(
             value = "/filterWines",
             method = RequestMethod.POST,

@@ -36,6 +36,10 @@ public class WineController {
     @Autowired
     private GrapeService grapeService;
 
+    /**
+     * Method that receives data needed for new wine, calls wine service which saves that wine to database.
+     * @param newWineDTO new wine data
+     */
     @RequestMapping(
             value = "/new",
             method = RequestMethod.POST,
@@ -84,6 +88,12 @@ public class WineController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * Method that receives changed data of one existing wine, calls wine service which then saves changes
+     * to database.
+     * @param wineDTO changed wine data
+     * @return wineDTO
+     */
     @RequestMapping(
             value = "/change",
             method = RequestMethod.PUT,
@@ -143,6 +153,10 @@ public class WineController {
         return new ResponseEntity<>(wineDTO, HttpStatus.CREATED);
     }
 
+    /**
+     * Method that returns list of all wines from database.
+     * @return wineDTOS
+     */
     @RequestMapping(
             value = "/all",
             method = RequestMethod.GET,
@@ -165,6 +179,10 @@ public class WineController {
         return new ResponseEntity<>(wineDTOS, HttpStatus.OK);
     }
 
+    /**
+     * Method that receives wine id and calls wine service which than deletes corresponding wine.
+     * @param id wine id
+     */
     @RequestMapping(
             value = "/",
             method = RequestMethod.DELETE,

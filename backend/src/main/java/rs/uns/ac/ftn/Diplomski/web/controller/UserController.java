@@ -47,7 +47,11 @@ public class UserController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
+    /**
+     * Method which receives data necessary for login and return userToken if data is valid for some user in database.
+     * @param loginDTO login data(username and password)
+     * @return userToken
+     */
     @RequestMapping(
             value = "/login",
             method = RequestMethod.POST,
@@ -73,13 +77,18 @@ public class UserController {
         }
     }
 
+    /**
+     * Method that receives data for new admin registration, calls account and authority services and makes new
+     * user anc account in database.
+     * @param registrationDTO data for admin registration
+     */
     @RequestMapping(
             value = "/admin",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity regitrationAdmin(@RequestBody RegistrationDTO registrationDTO) {
+    public ResponseEntity registrationAdmin(@RequestBody RegistrationDTO registrationDTO) {
 
         this.accountService.checkUsername(registrationDTO.getLoginAccount().getUsername());
 
@@ -102,6 +111,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * Method that receives changed account data for one user, calls account service that saves changes to database.
+     * @param registrationDTO data for changing account
+     */
     @RequestMapping(
             value = "/changeAccount",
             method = RequestMethod.PUT,
@@ -123,6 +136,11 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Method that returns all user accounts from database, based on type.
+     * @param typeName account type (admin or user)
+     * @return accountDTOS
+     */
     @RequestMapping(
             value = "/allAccounts",
             method = RequestMethod.GET,
@@ -144,6 +162,10 @@ public class UserController {
         return new ResponseEntity<>(accountDTOS, HttpStatus.OK);
     }
 
+    /**
+     * Method that receives username, calls account service, which then deletes corresponding account from database.
+     * @param username username
+     */
     @RequestMapping(
             value = "/",
             method = RequestMethod.DELETE,
