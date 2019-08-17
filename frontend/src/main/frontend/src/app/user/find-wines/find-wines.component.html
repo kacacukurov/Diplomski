@@ -43,6 +43,7 @@
             <th scope="col">#</th>
             <th scope="col">Wine name</th>
             <th scope="col">About wine</th>
+            <th scope="col">Similar</th>
           </tr>
           </thead>
           <tbody>
@@ -50,6 +51,7 @@
             <th scope="row">{{wine.id}}</th>
             <td>{{wine.wineName}}</td>
             <td><button class="btn btn-info" (click)="moreAboutWine(wine)">&nbsp;&nbsp;<i class="fa fa-info-circle"></i>&nbsp;&nbsp;</button></td>
+            <td><button class="btn btn-info" (click)="similarWines(wine)">&nbsp;&nbsp;<i class="fa fa-question-circle"></i>&nbsp;&nbsp;</button></td>
           </tr>
           </tbody>
         </table>

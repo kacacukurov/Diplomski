@@ -9,6 +9,7 @@ import {SharedModule} from "../shared/shared.module";
 import { AboutWineModalComponent } from './about-wine-modal/about-wine-modal.component';
 import { WineGrapesListModalComponent } from './wine-grapes-list-modal/wine-grapes-list-modal.component';
 import { FilterWinesComponent } from './filter-wines/filter-wines.component';
+import { SimilarWinesModalComponent } from './similar-wines-modal/similar-wines-modal.component';
 
 @NgModule({
   imports: [
@@ -23,10 +24,12 @@ import { FilterWinesComponent } from './filter-wines/filter-wines.component';
     FindGrapesComponent,
     AboutWineModalComponent,
     WineGrapesListModalComponent,
-    FilterWinesComponent],
+    FilterWinesComponent,
+    SimilarWinesModalComponent],
   entryComponents: [
     AboutWineModalComponent,
-    WineGrapesListModalComponent
+    WineGrapesListModalComponent,
+    SimilarWinesModalComponent
   ]
 })
 export class UserModule { }

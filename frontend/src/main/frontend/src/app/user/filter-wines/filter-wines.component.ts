@@ -12,6 +12,8 @@ import {BadRequestError} from "../../shared/errors/bad-request-error";
 import {AboutWineModalComponent} from "../about-wine-modal/about-wine-modal.component";
 import {filterDTO} from "../../shared/models/filterDTO";
 import {DroolsService} from "../../core/services/drools.service";
+import {wineSimilarDTO} from "../../shared/models/wineSimilarDTO";
+import {SimilarWinesModalComponent} from "../similar-wines-modal/similar-wines-modal.component";
 
 @Component({
   selector: 'app-filter-wines',
@@ -97,6 +99,31 @@ export class FilterWinesComponent implements OnInit {
 
     this.droolsService.filterWines(this.filterDTO).subscribe(data =>{
       this.listWines = data;
+    },(error: AppError) => {
+      if(error instanceof NotFoundError)
+        this.toasterService.pop('error', 'Error', 'Wines not found!');
+      else if(error instanceof ForbiddenError)
+        this.toasterService.pop('error', 'Error', 'You do not have permission for this action!');
+      else if(error instanceof BadRequestError)
+        this.toasterService.pop('error', 'Error', 'Bad request!');
+      else {
+        this.toasterService.pop('error', 'Error', 'Error, look at console!');
+        throw error;
+      }
+    });
+  }
+
+  similarWines(wine: wineDTO){
+    this.wineService.similarWine(wine.wineName).subscribe(data =>{
+      this.modalRef = this.modalService.show(
+        SimilarWinesModalComponent,
+        Object.assign({},{class: 'modal-lg'})
+      );
+      this.modalRef.content.chosenWine = wine;
+      this.modalRef.content.similarWines = data;
+      this.modalRef.content.modalRef = this.modalRef;
+      this.modalRef.content.closeReady.subscribe( data => {
+      });
     },(error: AppError) => {
       if(error instanceof NotFoundError)
         this.toasterService.pop('error', 'Error', 'Wines not found!');

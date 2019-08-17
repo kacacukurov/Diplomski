@@ -13,6 +13,9 @@ import {ForbiddenError} from "../../shared/errors/forbidden-error";
 import {BadRequestError} from "../../shared/errors/bad-request-error";
 import {missingGrapesDTO} from "../../shared/models/missingGrapesDTO";
 import {WineGrapesListModalComponent} from "../wine-grapes-list-modal/wine-grapes-list-modal.component";
+import {SimilarWinesModalComponent} from "../similar-wines-modal/similar-wines-modal.component";
+import {wineSimilarDTO} from "../../shared/models/wineSimilarDTO";
+import {WineService} from "../../core/services/wine.service";
 
 @Component({
   selector: 'app-find-wines-and-grapes',
@@ -30,7 +33,8 @@ export class FindWinesAndGrapesComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(private router: Router, private grapeService: GrapeService, private jwtService: JwtService,
-              private toasterService: ToasterService,private modalService : BsModalService, private droolsService: DroolsService) {
+              private toasterService: ToasterService,private modalService : BsModalService,
+              private droolsService: DroolsService, private wineService: WineService) {
     this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.listGrapes = [];
     this.listChonesGrapes = [];
@@ -120,8 +124,6 @@ export class FindWinesAndGrapesComponent implements OnInit {
       Object.assign({},{ class: 'modal-lg' })
     );
     this.existingGrapes = [];
-    console.log(possible.wineDTO.grapeDTOS);
-    console.log(possible.grapeDTOS);
     for(let grape of possible.wineDTO.grapeDTOS){
       let index = -1;
       for(let g of possible.grapeDTOS){
@@ -132,7 +134,6 @@ export class FindWinesAndGrapesComponent implements OnInit {
         this.existingGrapes.push(grape);
       }
     }
-    console.log(this.existingGrapes);
     this.modalRef.content.wine = possible;
     this.modalRef.content.existingGrapes = this.existingGrapes;
     this.modalRef.content.missingGrapes = possible.grapeDTOS;
@@ -141,4 +142,28 @@ export class FindWinesAndGrapesComponent implements OnInit {
     });
   }
 
+  similarWines(possible: missingGrapesDTO){
+    this.wineService.similarWine(possible.wineDTO.wineName).subscribe(data =>{
+      this.modalRef = this.modalService.show(
+        SimilarWinesModalComponent,
+        Object.assign({},{class: 'modal-lg'})
+      );
+      this.modalRef.content.chosenWine = possible.wineDTO;
+      this.modalRef.content.similarWines = data;
+      this.modalRef.content.modalRef = this.modalRef;
+      this.modalRef.content.closeReady.subscribe( data => {
+      });
+    },(error: AppError) => {
+      if(error instanceof NotFoundError)
+        this.toasterService.pop('error', 'Error', 'Wines not found!');
+      else if(error instanceof ForbiddenError)
+        this.toasterService.pop('error', 'Error', 'You do not have permission for this action!');
+      else if(error instanceof BadRequestError)
+        this.toasterService.pop('error', 'Error', 'Bad request!');
+      else {
+        this.toasterService.pop('error', 'Error', 'Error, look at console!');
+        throw error;
+      }
+    });
+  }
 }

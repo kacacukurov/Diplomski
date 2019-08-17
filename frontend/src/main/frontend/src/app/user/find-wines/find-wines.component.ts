@@ -13,6 +13,9 @@ import {BadRequestError} from "../../shared/errors/bad-request-error";
 import {wineDTO} from "../../shared/models/wineDTO";
 import {grapeListDTO} from "../../shared/models/grapeListDTO";
 import {AboutWineModalComponent} from "../about-wine-modal/about-wine-modal.component";
+import {SimilarWinesModalComponent} from "../similar-wines-modal/similar-wines-modal.component";
+import {wineSimilarDTO} from "../../shared/models/wineSimilarDTO";
+import {WineService} from "../../core/services/wine.service";
 
 @Component({
   selector: 'app-find-wines',
@@ -29,7 +32,8 @@ export class FindWinesComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(private router: Router, private grapeService: GrapeService, private jwtService: JwtService,
-              private toasterService: ToasterService,private modalService : BsModalService, private droolsService: DroolsService) {
+              private toasterService: ToasterService,private modalService : BsModalService,
+              private droolsService: DroolsService, private wineService: WineService) {
     this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.listGrapes = [];
     this.listChonesGrapes = [];
@@ -120,6 +124,31 @@ export class FindWinesComponent implements OnInit {
     this.modalRef.content.wine = wine;
     this.modalRef.content.modalRef = this.modalRef;
     this.modalRef.content.closeReady.subscribe( data => {
+    });
+  }
+
+  similarWines(wine: wineDTO){
+    this.wineService.similarWine(wine.wineName).subscribe(data =>{
+      this.modalRef = this.modalService.show(
+        SimilarWinesModalComponent,
+        Object.assign({},{class: 'modal-lg'})
+      );
+      this.modalRef.content.chosenWine = wine;
+      this.modalRef.content.similarWines = data;
+      this.modalRef.content.modalRef = this.modalRef;
+      this.modalRef.content.closeReady.subscribe( data => {
+      });
+    },(error: AppError) => {
+      if(error instanceof NotFoundError)
+        this.toasterService.pop('error', 'Error', 'Wines not found!');
+      else if(error instanceof ForbiddenError)
+        this.toasterService.pop('error', 'Error', 'You do not have permission for this action!');
+      else if(error instanceof BadRequestError)
+        this.toasterService.pop('error', 'Error', 'Bad request!');
+      else {
+        this.toasterService.pop('error', 'Error', 'Error, look at console!');
+        throw error;
+      }
     });
   }
 }

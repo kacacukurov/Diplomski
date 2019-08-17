@@ -84,6 +84,13 @@
             <artifactId>kie-ci</artifactId>
             <version>6.5.0.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

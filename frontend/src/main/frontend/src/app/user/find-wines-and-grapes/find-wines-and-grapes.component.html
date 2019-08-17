@@ -43,6 +43,7 @@
             <th scope="col">#</th>
             <th scope="col">Wine name</th>
             <th scope="col">About wine</th>
+            <th scope="col">Similar</th>
           </tr>
           </thead>
           <tbody>
@@ -50,6 +51,7 @@
             <th scope="row">{{possible.wineDTO.id}}</th>
             <td>{{possible.wineDTO.wineName}}</td>
             <td><button class="btn btn-info" (click)="moreAboutWine(possible)">&nbsp;&nbsp;<i class="fa fa-info-circle"></i>&nbsp;&nbsp;</button></td>
+            <td><button class="btn btn-info" (click)="similarWines(possible)">&nbsp;&nbsp;<i class="fa fa-question-circle"></i>&nbsp;&nbsp;</button></td>
           </tr>
           </tbody>
         </table>

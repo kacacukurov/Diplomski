@@ -1,5 +1,6 @@
 package rs.uns.ac.ftn.Diplomski.web.controller;
 
+import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +17,14 @@ import rs.uns.ac.ftn.Diplomski.service.WineryService;
 import rs.uns.ac.ftn.Diplomski.web.dto.GrapeDTO;
 import rs.uns.ac.ftn.Diplomski.web.dto.NewWineDTO;
 import rs.uns.ac.ftn.Diplomski.web.dto.WineDTO;
+import rs.uns.ac.ftn.Diplomski.web.dto.WineSimilarDTO;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -195,5 +202,62 @@ public class WineController {
 
         this.wineService.remove(wine);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    /**
+     * Method that returns list of similar wines to chosen wine.
+     * @return List<WineSimilarDTO>
+     */
+    @RequestMapping(
+            value = "/similar/{wineName}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity getAllSimilarWines(@PathVariable("wineName") String wineName) throws NullPointerException, IOException{
+        List<WineSimilarDTO> similarWinesDTO = getBestSimilarWines(wineName.toLowerCase());
+        return new ResponseEntity<>(similarWinesDTO, HttpStatus.OK);
+    }
+
+    private List<WineSimilarDTO> getBestSimilarWines(String wineName) throws NullPointerException, IOException{
+        if(wineName.contains("white") || wineName.contains("red")){
+            wineName = wineName.split(" ")[1];
+        }
+
+        List<WineSimilarDTO> mostSimilarWines = new ArrayList<>();
+        double percentage = 0;
+
+        for(int i = 0; i < 11; i++){
+            List<WineSimilarDTO> similarDTOS = new ArrayList<>();
+            // load from file
+            List<List<String>> records = new ArrayList<List<String>>();
+            URL url = ClassLoader.getSystemClassLoader().getResource("clusters/cluster_" + i + ".csv");
+            try (CSVReader csvReader = new CSVReader(new FileReader(url.getFile()))) {
+                String[] values = null;
+                while ((values = csvReader.readNext()) != null) {
+                    records.add(Arrays.asList(values));
+                }
+            }
+            records.remove(0);
+            records.forEach(record -> similarDTOS.add(new WineSimilarDTO(record.get(12), record.get(3))));
+            System.out.println("klasteer  " + similarDTOS.size());
+            // calculate percentage
+            int total = 0;
+            for(WineSimilarDTO wine: similarDTOS){
+                if(wine.getTitle().toLowerCase().contains(wineName))
+                    total += 1;
+            }
+            double new_percentage = ((double)total / similarDTOS.size()) * 100;
+            System.out.println(new_percentage);
+            if(new_percentage > percentage) {
+                percentage = new_percentage;
+                mostSimilarWines = new ArrayList<>();
+                for (WineSimilarDTO wine : similarDTOS) {
+                    mostSimilarWines.add(wine);
+                }
+            }
+            System.out.println(mostSimilarWines.size());
+        }
+
+        return mostSimilarWines;
     }
 }

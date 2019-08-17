@@ -8,6 +8,7 @@ import {ConflictError} from "../../shared/errors/conflict-error";
 import {AppError} from "../../shared/errors/app-error";
 import {newWineDTO} from "../../shared/models/newWineDTO";
 import {wineDTO} from "../../shared/models/wineDTO";
+import {wineSimilarDTO} from "../../shared/models/wineSimilarDTO";
 
 @Injectable()
 export class WineService {
@@ -29,6 +30,10 @@ export class WineService {
 
   deleteWine(id: number): Observable<void> {
     return this.http.delete<void>(`${this.urlBase}/?id=${id}`).catch(this.handleErrors);
+  }
+
+  similarWine(title: string): Observable<Array<wineSimilarDTO>>{
+    return this.http.get<Array<wineSimilarDTO>>(`${this.urlBase}/similar/${title}`).catch(this.handleErrors);
   }
 
 
